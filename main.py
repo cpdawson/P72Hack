@@ -12,7 +12,7 @@ app.register_blueprint(views_bp)
 ###############################################################
 # 1) Hardcode which vehicle class to show, e.g. "Car" or "Taxi"
 ###############################################################
-SELECTED_CLASS = ""  # e.g. "Car", "Taxi", "Buses", etc.
+SELECTED_CLASS = "Car"  # e.g. "Car", "Taxi", "Buses", etc.
 
 #####################################
 # 2) Define route definitions
@@ -75,39 +75,39 @@ def get_car_routes():
             "icon_url": url_for('static', filename=f'vehicles/{class_lower}_icon_337.png')
         },
         {
-            "name": "Queens Midtown",
+            "name": "Queens Midtown Tunnel",
             "start": [40.74289229922877, -73.96082715665342],
             "end": [40.747834966345074, -73.96816127996215],
             "duration": 4000,
             "icon_url": url_for('static', filename=f'vehicles/{class_lower}_icon_337.png')
         },
         {
-            "name": "West 60th",
+            "name": "West 60th St",
             "start": [40.77164541992876, -73.98306418072985],
             "end": [40.768193524649575, -73.98565628724995],
             "duration": 4000,
-            "icon_url": url_for('static', filename=f'vehicles/{class_lower}_icon_0.png')
+            "icon_url": url_for('static', filename=f'vehicles/{class_lower}_icon_45.png')
         },
         {
-            "name": "11th Ave and 60th",
-            "start": [40.77326978935373, -73.98933771562456],
-            "end": [40.768173333383125, -73.99302066958496],
+            "name": "FDR Drive at 60th St",
+            "start": [40.765785223608674, -73.95748405831618],
+            "end": [40.76275029301429, -73.95971426811401],
             "duration": 4000,
-            "icon_url": url_for('static', filename=f'vehicles/{class_lower}_icon_0.png')
+            "icon_url": url_for('static', filename=f'vehicles/{class_lower}_icon_45.png')
         },
         {
-            "name": "East 60th",
+            "name": "East 60th St",
             "start": [40.76328718520095, -73.96243948478009],
             "end": [40.75937598422883, -73.96541471379228],
             "duration": 4000,
-            "icon_url": url_for('static', filename=f'vehicles/{class_lower}_icon_0.png')
+            "icon_url": url_for('static', filename=f'vehicles/{class_lower}_icon_45.png')
         },
         {
-            "name": "60th and 1st",
-            "start": [40.76444641664966, -73.95843436877433],
-            "end": [40.76103366817469, -73.96405583512909],
+            "name": "West Side Highway at 60th St",
+            "start": [40.77321742695657, -73.98939439202347],
+            "end": [40.77019877213487, -73.99163134442664],
             "duration": 4000,
-            "icon_url": url_for('static', filename=f'vehicles/{class_lower}_icon_0.png')
+            "icon_url": url_for('static', filename=f'vehicles/{class_lower}_icon_45.png')
         }
     ]
 
@@ -150,7 +150,7 @@ def parse_info_json(json_path="info.json"):
 ###############################################################
 # 4) Build JS spawns, ignoring other classes
 ###############################################################
-def build_spawn_js_from_timestepdata(timestep_data, speed=2000, spawn_window=5000, step_delay=2000):
+def build_spawn_js_from_timestepdata(timestep_data, speed=2000, spawn_window=20000, step_delay=2000):
     """
     We'll spawn only SELECTED_CLASS vehicles (already filtered in parse_info_json).
     Each step spawns them over 'spawn_window' ms,
@@ -247,7 +247,7 @@ def index():
     selected_car_js = build_spawn_js_from_timestepdata(
         timestep_data=all_timestep_data,
         speed=4000,
-        spawn_window=5000,
+        spawn_window=20000,
         step_delay=2000
     )
 
