@@ -5,12 +5,12 @@
         "cumulative": {
           "by_class": {
             "Buses": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 14.4,
+              "vehicles": 1
             },
             "Car": {
-              "revenue": 30,
-              "vehicles": 13.33
+              "revenue": 537,
+              "vehicles": 59.67
             },
             "Motorcycles": {
               "revenue": 0,
@@ -21,26 +21,26 @@
               "vehicles": 0
             },
             "Single Unit Trucks": {
-              "revenue": 2.4,
-              "vehicles": 0.67
+              "revenue": 19.2,
+              "vehicles": 1.33
             },
             "Taxi": {
-              "revenue": 11.5,
-              "vehicles": 15.33
+              "revenue": 13.75,
+              "vehicles": 18.33
             }
           },
-          "revenue": 43.9,
-          "vehicles": 29.33
+          "revenue": 584.35,
+          "vehicles": 80.33
         },
         "current": {
           "by_class": {
             "Buses": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 14.4,
+              "vehicles": 1
             },
             "Car": {
-              "revenue": 30,
-              "vehicles": 13.33
+              "revenue": 537,
+              "vehicles": 59.67
             },
             "Motorcycles": {
               "revenue": 0,
@@ -51,586 +51,586 @@
               "vehicles": 0
             },
             "Single Unit Trucks": {
-              "revenue": 2.4,
-              "vehicles": 0.67
+              "revenue": 19.2,
+              "vehicles": 1.33
             },
             "Taxi": {
-              "revenue": 11.5,
-              "vehicles": 15.33
+              "revenue": 13.75,
+              "vehicles": 18.33
             }
           },
-          "total_revenue": 43.9,
-          "total_vehicles": 29.33
+          "total_revenue": 584.35,
+          "total_vehicles": 80.33
         }
       },
       "East 60th St": {
         "cumulative": {
           "by_class": {
             "Buses": {
-              "revenue": 3.6,
-              "vehicles": 1
+              "revenue": 148.8,
+              "vehicles": 10.33
             },
             "Car": {
-              "revenue": 153,
-              "vehicles": 68
+              "revenue": 834,
+              "vehicles": 92.67
             },
             "Motorcycles": {
-              "revenue": 0.35,
-              "vehicles": 0.33
-            },
-            "Multi Unit Trucks": {
               "revenue": 0,
               "vehicles": 0
             },
+            "Multi Unit Trucks": {
+              "revenue": 21.6,
+              "vehicles": 1
+            },
             "Single Unit Trucks": {
-              "revenue": 13.2,
-              "vehicles": 3.67
+              "revenue": 216,
+              "vehicles": 15
             },
             "Taxi": {
-              "revenue": 59.75,
-              "vehicles": 79.67
+              "revenue": 45.75,
+              "vehicles": 61
             }
           },
-          "revenue": 229.9,
-          "vehicles": 152.67
+          "revenue": 1266.15,
+          "vehicles": 180
         },
         "current": {
           "by_class": {
             "Buses": {
-              "revenue": 3.6,
-              "vehicles": 1
+              "revenue": 148.8,
+              "vehicles": 10.33
             },
             "Car": {
-              "revenue": 153,
-              "vehicles": 68
+              "revenue": 834,
+              "vehicles": 92.67
             },
             "Motorcycles": {
-              "revenue": 0.35,
-              "vehicles": 0.33
-            },
-            "Multi Unit Trucks": {
               "revenue": 0,
               "vehicles": 0
             },
+            "Multi Unit Trucks": {
+              "revenue": 21.6,
+              "vehicles": 1
+            },
             "Single Unit Trucks": {
-              "revenue": 13.2,
-              "vehicles": 3.67
+              "revenue": 216,
+              "vehicles": 15
             },
             "Taxi": {
-              "revenue": 59.75,
-              "vehicles": 79.67
+              "revenue": 45.75,
+              "vehicles": 61
             }
           },
-          "total_revenue": 229.9,
-          "total_vehicles": 152.67
+          "total_revenue": 1266.15,
+          "total_vehicles": 180
         }
       },
       "FDR Drive at 60th St": {
         "cumulative": {
           "by_class": {
             "Buses": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 28.8,
+              "vehicles": 2
             },
             "Car": {
-              "revenue": 72.75,
-              "vehicles": 32.33
+              "revenue": 1095,
+              "vehicles": 121.67
             },
             "Motorcycles": {
-              "revenue": 0.7,
-              "vehicles": 0.67
+              "revenue": 1.5,
+              "vehicles": 0.33
             },
             "Multi Unit Trucks": {
               "revenue": 0,
               "vehicles": 0
             },
             "Single Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 28.8,
+              "vehicles": 2
             },
             "Taxi": {
-              "revenue": 16.25,
-              "vehicles": 21.67
+              "revenue": 29.25,
+              "vehicles": 39
             }
           },
-          "revenue": 89.7,
-          "vehicles": 54.67
+          "revenue": 1183.35,
+          "vehicles": 165
         },
         "current": {
           "by_class": {
             "Buses": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 28.8,
+              "vehicles": 2
             },
             "Car": {
-              "revenue": 72.75,
-              "vehicles": 32.33
+              "revenue": 1095,
+              "vehicles": 121.67
             },
             "Motorcycles": {
-              "revenue": 0.7,
-              "vehicles": 0.67
+              "revenue": 1.5,
+              "vehicles": 0.33
             },
             "Multi Unit Trucks": {
               "revenue": 0,
               "vehicles": 0
             },
             "Single Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 28.8,
+              "vehicles": 2
             },
             "Taxi": {
-              "revenue": 16.25,
-              "vehicles": 21.67
+              "revenue": 29.25,
+              "vehicles": 39
             }
           },
-          "total_revenue": 89.7,
-          "total_vehicles": 54.67
+          "total_revenue": 1183.35,
+          "total_vehicles": 165
         }
       },
       "Holland Tunnel": {
         "cumulative": {
           "by_class": {
             "Buses": {
-              "revenue": 1.2,
-              "vehicles": 0.33
+              "revenue": 9.6,
+              "vehicles": 0.67
             },
             "Car": {
-              "revenue": 21,
-              "vehicles": 9.33
+              "revenue": 1008,
+              "vehicles": 112
             },
             "Motorcycles": {
               "revenue": 0,
               "vehicles": 0
             },
             "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 28.8,
+              "vehicles": 1.33
             },
             "Single Unit Trucks": {
-              "revenue": 6,
-              "vehicles": 1.67
+              "revenue": 139.2,
+              "vehicles": 9.67
             },
             "Taxi": {
-              "revenue": 16.5,
-              "vehicles": 22
+              "revenue": 11.75,
+              "vehicles": 15.67
             }
           },
-          "revenue": 44.7,
-          "vehicles": 33.33
+          "revenue": 1197.35,
+          "vehicles": 139.33
         },
         "current": {
           "by_class": {
             "Buses": {
-              "revenue": 1.2,
-              "vehicles": 0.33
+              "revenue": 9.6,
+              "vehicles": 0.67
             },
             "Car": {
-              "revenue": 21,
-              "vehicles": 9.33
+              "revenue": 1008,
+              "vehicles": 112
             },
             "Motorcycles": {
               "revenue": 0,
               "vehicles": 0
             },
             "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 28.8,
+              "vehicles": 1.33
             },
             "Single Unit Trucks": {
-              "revenue": 6,
-              "vehicles": 1.67
+              "revenue": 139.2,
+              "vehicles": 9.67
             },
             "Taxi": {
-              "revenue": 16.5,
-              "vehicles": 22
+              "revenue": 11.75,
+              "vehicles": 15.67
             }
           },
-          "total_revenue": 44.7,
-          "total_vehicles": 33.33
+          "total_revenue": 1197.35,
+          "total_vehicles": 139.33
         }
       },
       "Hugh L. Carey Tunnel": {
         "cumulative": {
           "by_class": {
             "Buses": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 86.4,
+              "vehicles": 6
             },
             "Car": {
-              "revenue": 9,
-              "vehicles": 4
+              "revenue": 555,
+              "vehicles": 61.67
             },
             "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 1.5,
+              "vehicles": 0.33
             },
             "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 7.2,
+              "vehicles": 0.33
             },
             "Single Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 81.6,
+              "vehicles": 5.67
             },
             "Taxi": {
-              "revenue": 0.75,
-              "vehicles": 1
+              "revenue": 11.75,
+              "vehicles": 15.67
             }
           },
-          "revenue": 9.75,
-          "vehicles": 5
+          "revenue": 743.45,
+          "vehicles": 89.67
         },
         "current": {
           "by_class": {
             "Buses": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 86.4,
+              "vehicles": 6
             },
             "Car": {
-              "revenue": 9,
-              "vehicles": 4
+              "revenue": 555,
+              "vehicles": 61.67
             },
             "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 1.5,
+              "vehicles": 0.33
             },
             "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 7.2,
+              "vehicles": 0.33
             },
             "Single Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 81.6,
+              "vehicles": 5.67
             },
             "Taxi": {
-              "revenue": 0.75,
-              "vehicles": 1
+              "revenue": 11.75,
+              "vehicles": 15.67
             }
           },
-          "total_revenue": 9.75,
-          "total_vehicles": 5
+          "total_revenue": 743.45,
+          "total_vehicles": 89.67
         }
       },
       "Lincoln Tunnel": {
         "cumulative": {
           "by_class": {
             "Buses": {
-              "revenue": 4.8,
-              "vehicles": 1.33
+              "revenue": 124.8,
+              "vehicles": 8.67
             },
             "Car": {
-              "revenue": 57,
-              "vehicles": 25.33
+              "revenue": 1620,
+              "vehicles": 180
             },
             "Motorcycles": {
               "revenue": 0,
               "vehicles": 0
             },
             "Multi Unit Trucks": {
-              "revenue": 12.6,
-              "vehicles": 2.33
+              "revenue": 28.8,
+              "vehicles": 1.33
             },
             "Single Unit Trucks": {
-              "revenue": 3.6,
-              "vehicles": 1
+              "revenue": 360,
+              "vehicles": 25
             },
             "Taxi": {
-              "revenue": 16.25,
-              "vehicles": 21.67
+              "revenue": 9.5,
+              "vehicles": 12.67
             }
           },
-          "revenue": 94.25,
-          "vehicles": 51.67
+          "revenue": 2143.1,
+          "vehicles": 227.67
         },
         "current": {
           "by_class": {
             "Buses": {
-              "revenue": 4.8,
-              "vehicles": 1.33
+              "revenue": 124.8,
+              "vehicles": 8.67
             },
             "Car": {
-              "revenue": 57,
-              "vehicles": 25.33
+              "revenue": 1620,
+              "vehicles": 180
             },
             "Motorcycles": {
               "revenue": 0,
               "vehicles": 0
             },
             "Multi Unit Trucks": {
-              "revenue": 12.6,
-              "vehicles": 2.33
+              "revenue": 28.8,
+              "vehicles": 1.33
             },
             "Single Unit Trucks": {
-              "revenue": 3.6,
-              "vehicles": 1
+              "revenue": 360,
+              "vehicles": 25
             },
             "Taxi": {
-              "revenue": 16.25,
-              "vehicles": 21.67
+              "revenue": 9.5,
+              "vehicles": 12.67
             }
           },
-          "total_revenue": 94.25,
-          "total_vehicles": 51.67
+          "total_revenue": 2143.1,
+          "total_vehicles": 227.67
         }
       },
       "Manhattan Bridge": {
         "cumulative": {
           "by_class": {
             "Buses": {
-              "revenue": 1.2,
-              "vehicles": 0.33
+              "revenue": 72,
+              "vehicles": 5
             },
             "Car": {
-              "revenue": 26.25,
-              "vehicles": 11.67
+              "revenue": 498,
+              "vehicles": 55.33
             },
             "Motorcycles": {
               "revenue": 0,
               "vehicles": 0
             },
             "Multi Unit Trucks": {
-              "revenue": 1.8,
-              "vehicles": 0.33
+              "revenue": 28.8,
+              "vehicles": 1.33
             },
             "Single Unit Trucks": {
-              "revenue": 2.4,
-              "vehicles": 0.67
+              "revenue": 163.2,
+              "vehicles": 11.33
             },
             "Taxi": {
-              "revenue": 14.75,
-              "vehicles": 19.67
+              "revenue": 12,
+              "vehicles": 16
             }
           },
-          "revenue": 46.4,
-          "vehicles": 32.67
+          "revenue": 774,
+          "vehicles": 89
         },
         "current": {
           "by_class": {
             "Buses": {
-              "revenue": 1.2,
-              "vehicles": 0.33
+              "revenue": 72,
+              "vehicles": 5
             },
             "Car": {
-              "revenue": 26.25,
-              "vehicles": 11.67
+              "revenue": 498,
+              "vehicles": 55.33
             },
             "Motorcycles": {
               "revenue": 0,
               "vehicles": 0
             },
             "Multi Unit Trucks": {
-              "revenue": 1.8,
-              "vehicles": 0.33
+              "revenue": 28.8,
+              "vehicles": 1.33
             },
             "Single Unit Trucks": {
-              "revenue": 2.4,
-              "vehicles": 0.67
+              "revenue": 163.2,
+              "vehicles": 11.33
             },
             "Taxi": {
-              "revenue": 14.75,
-              "vehicles": 19.67
+              "revenue": 12,
+              "vehicles": 16
             }
           },
-          "total_revenue": 46.4,
-          "total_vehicles": 32.67
+          "total_revenue": 774,
+          "total_vehicles": 89
         }
       },
       "Queens Midtown Tunnel": {
         "cumulative": {
           "by_class": {
             "Buses": {
-              "revenue": 1.2,
-              "vehicles": 0.33
+              "revenue": 33.6,
+              "vehicles": 2.33
             },
             "Car": {
-              "revenue": 12.75,
-              "vehicles": 5.67
+              "revenue": 780,
+              "vehicles": 86.67
             },
             "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 1.5,
+              "vehicles": 0.33
             },
             "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 7.2,
+              "vehicles": 0.33
             },
             "Single Unit Trucks": {
-              "revenue": 3.6,
-              "vehicles": 1
+              "revenue": 268.8,
+              "vehicles": 18.67
             },
             "Taxi": {
-              "revenue": 18.5,
-              "vehicles": 24.67
+              "revenue": 21.25,
+              "vehicles": 28.33
             }
           },
-          "revenue": 36.05,
-          "vehicles": 31.67
+          "revenue": 1112.35,
+          "vehicles": 136.67
         },
         "current": {
           "by_class": {
             "Buses": {
-              "revenue": 1.2,
-              "vehicles": 0.33
+              "revenue": 33.6,
+              "vehicles": 2.33
             },
             "Car": {
-              "revenue": 12.75,
-              "vehicles": 5.67
+              "revenue": 780,
+              "vehicles": 86.67
             },
             "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 1.5,
+              "vehicles": 0.33
             },
             "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 7.2,
+              "vehicles": 0.33
             },
             "Single Unit Trucks": {
-              "revenue": 3.6,
-              "vehicles": 1
+              "revenue": 268.8,
+              "vehicles": 18.67
             },
             "Taxi": {
-              "revenue": 18.5,
-              "vehicles": 24.67
+              "revenue": 21.25,
+              "vehicles": 28.33
             }
           },
-          "total_revenue": 36.05,
-          "total_vehicles": 31.67
+          "total_revenue": 1112.35,
+          "total_vehicles": 136.67
         }
       },
       "Queensboro Bridge": {
         "cumulative": {
           "by_class": {
             "Buses": {
-              "revenue": 1.2,
-              "vehicles": 0.33
+              "revenue": 24,
+              "vehicles": 1.67
             },
             "Car": {
-              "revenue": 48,
-              "vehicles": 21.33
+              "revenue": 726,
+              "vehicles": 80.67
             },
             "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 4.5,
+              "vehicles": 1
             },
             "Multi Unit Trucks": {
-              "revenue": 3.6,
+              "revenue": 14.4,
               "vehicles": 0.67
             },
             "Single Unit Trucks": {
-              "revenue": 1.2,
-              "vehicles": 0.33
+              "revenue": 187.2,
+              "vehicles": 13
             },
             "Taxi": {
-              "revenue": 14.5,
-              "vehicles": 19.33
+              "revenue": 30,
+              "vehicles": 40
             }
           },
-          "revenue": 68.5,
-          "vehicles": 42
+          "revenue": 986.1,
+          "vehicles": 137
         },
         "current": {
           "by_class": {
             "Buses": {
-              "revenue": 1.2,
-              "vehicles": 0.33
+              "revenue": 24,
+              "vehicles": 1.67
             },
             "Car": {
-              "revenue": 48,
-              "vehicles": 21.33
+              "revenue": 726,
+              "vehicles": 80.67
             },
             "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 4.5,
+              "vehicles": 1
             },
             "Multi Unit Trucks": {
-              "revenue": 3.6,
+              "revenue": 14.4,
               "vehicles": 0.67
             },
             "Single Unit Trucks": {
-              "revenue": 1.2,
-              "vehicles": 0.33
+              "revenue": 187.2,
+              "vehicles": 13
             },
             "Taxi": {
-              "revenue": 14.5,
-              "vehicles": 19.33
+              "revenue": 30,
+              "vehicles": 40
             }
           },
-          "total_revenue": 68.5,
-          "total_vehicles": 42
+          "total_revenue": 986.1,
+          "total_vehicles": 137
         }
       },
       "West 60th St": {
         "cumulative": {
           "by_class": {
             "Buses": {
-              "revenue": 4.8,
-              "vehicles": 1.33
+              "revenue": 48,
+              "vehicles": 3.33
             },
             "Car": {
-              "revenue": 40.5,
-              "vehicles": 18
+              "revenue": 279,
+              "vehicles": 31
             },
             "Motorcycles": {
-              "revenue": 0.7,
-              "vehicles": 0.67
+              "revenue": 0,
+              "vehicles": 0
             },
             "Multi Unit Trucks": {
-              "revenue": 3.6,
-              "vehicles": 0.67
-            },
-            "Single Unit Trucks": {
-              "revenue": 1.2,
+              "revenue": 7.2,
               "vehicles": 0.33
             },
+            "Single Unit Trucks": {
+              "revenue": 76.8,
+              "vehicles": 5.33
+            },
             "Taxi": {
-              "revenue": 32.5,
-              "vehicles": 43.33
+              "revenue": 26.25,
+              "vehicles": 35
             }
           },
-          "revenue": 83.3,
-          "vehicles": 64.33
+          "revenue": 437.25,
+          "vehicles": 75
         },
         "current": {
           "by_class": {
             "Buses": {
-              "revenue": 4.8,
-              "vehicles": 1.33
+              "revenue": 48,
+              "vehicles": 3.33
             },
             "Car": {
-              "revenue": 40.5,
-              "vehicles": 18
+              "revenue": 279,
+              "vehicles": 31
             },
             "Motorcycles": {
-              "revenue": 0.7,
-              "vehicles": 0.67
+              "revenue": 0,
+              "vehicles": 0
             },
             "Multi Unit Trucks": {
-              "revenue": 3.6,
-              "vehicles": 0.67
-            },
-            "Single Unit Trucks": {
-              "revenue": 1.2,
+              "revenue": 7.2,
               "vehicles": 0.33
             },
+            "Single Unit Trucks": {
+              "revenue": 76.8,
+              "vehicles": 5.33
+            },
             "Taxi": {
-              "revenue": 32.5,
-              "vehicles": 43.33
+              "revenue": 26.25,
+              "vehicles": 35
             }
           },
-          "total_revenue": 83.3,
-          "total_vehicles": 64.33
+          "total_revenue": 437.25,
+          "total_vehicles": 75
         }
       },
       "West Side Highway at 60th St": {
         "cumulative": {
           "by_class": {
             "Buses": {
-              "revenue": 1.2,
-              "vehicles": 0.33
+              "revenue": 38.4,
+              "vehicles": 2.67
             },
             "Car": {
-              "revenue": 45,
-              "vehicles": 20
+              "revenue": 1464,
+              "vehicles": 162.67
             },
             "Motorcycles": {
               "revenue": 0,
@@ -641,26 +641,26 @@
               "vehicles": 0
             },
             "Single Unit Trucks": {
-              "revenue": 1.2,
-              "vehicles": 0.33
+              "revenue": 28.8,
+              "vehicles": 2
             },
             "Taxi": {
-              "revenue": 18.25,
-              "vehicles": 24.33
+              "revenue": 16.5,
+              "vehicles": 22
             }
           },
-          "revenue": 65.65,
-          "vehicles": 45
+          "revenue": 1547.7,
+          "vehicles": 189.33
         },
         "current": {
           "by_class": {
             "Buses": {
-              "revenue": 1.2,
-              "vehicles": 0.33
+              "revenue": 38.4,
+              "vehicles": 2.67
             },
             "Car": {
-              "revenue": 45,
-              "vehicles": 20
+              "revenue": 1464,
+              "vehicles": 162.67
             },
             "Motorcycles": {
               "revenue": 0,
@@ -671,83 +671,83 @@
               "vehicles": 0
             },
             "Single Unit Trucks": {
-              "revenue": 1.2,
-              "vehicles": 0.33
+              "revenue": 28.8,
+              "vehicles": 2
             },
             "Taxi": {
-              "revenue": 18.25,
-              "vehicles": 24.33
+              "revenue": 16.5,
+              "vehicles": 22
             }
           },
-          "total_revenue": 65.65,
-          "total_vehicles": 45
+          "total_revenue": 1547.7,
+          "total_vehicles": 189.33
         }
       },
       "Williamsburg Bridge": {
         "cumulative": {
           "by_class": {
             "Buses": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 33.6,
+              "vehicles": 2.33
             },
             "Car": {
-              "revenue": 41.25,
-              "vehicles": 18.33
+              "revenue": 684,
+              "vehicles": 76
             },
             "Motorcycles": {
-              "revenue": 0.35,
-              "vehicles": 0.33
+              "revenue": 3,
+              "vehicles": 0.67
             },
             "Multi Unit Trucks": {
               "revenue": 0,
               "vehicles": 0
             },
             "Single Unit Trucks": {
-              "revenue": 3.6,
-              "vehicles": 1
+              "revenue": 144,
+              "vehicles": 10
             },
             "Taxi": {
-              "revenue": 29.25,
-              "vehicles": 39
+              "revenue": 16.5,
+              "vehicles": 22
             }
           },
-          "revenue": 74.45,
-          "vehicles": 58.67
+          "revenue": 881.1,
+          "vehicles": 111
         },
         "current": {
           "by_class": {
             "Buses": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 33.6,
+              "vehicles": 2.33
             },
             "Car": {
-              "revenue": 41.25,
-              "vehicles": 18.33
+              "revenue": 684,
+              "vehicles": 76
             },
             "Motorcycles": {
-              "revenue": 0.35,
-              "vehicles": 0.33
+              "revenue": 3,
+              "vehicles": 0.67
             },
             "Multi Unit Trucks": {
               "revenue": 0,
               "vehicles": 0
             },
             "Single Unit Trucks": {
-              "revenue": 3.6,
-              "vehicles": 1
+              "revenue": 144,
+              "vehicles": 10
             },
             "Taxi": {
-              "revenue": 29.25,
-              "vehicles": 39
+              "revenue": 16.5,
+              "vehicles": 22
             }
           },
-          "total_revenue": 74.45,
-          "total_vehicles": 58.67
+          "total_revenue": 881.1,
+          "total_vehicles": 111
         }
       }
     },
     "scale": 1,
-    "timestamp": "2025-03-05 00:00:00"
+    "timestamp": "2025-01-07 07:00:00"
   },
   {
     "locations": {
@@ -755,12 +755,12 @@
         "cumulative": {
           "by_class": {
             "Buses": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 28.8,
+              "vehicles": 2
             },
             "Car": {
-              "revenue": 60,
-              "vehicles": 26.67
+              "revenue": 1074,
+              "vehicles": 119.33
             },
             "Motorcycles": {
               "revenue": 0,
@@ -771,26 +771,26 @@
               "vehicles": 0
             },
             "Single Unit Trucks": {
-              "revenue": 4.8,
-              "vehicles": 1.33
+              "revenue": 38.4,
+              "vehicles": 2.67
             },
             "Taxi": {
-              "revenue": 23,
-              "vehicles": 30.67
+              "revenue": 27.5,
+              "vehicles": 36.67
             }
           },
-          "revenue": 87.8,
-          "vehicles": 58.67
+          "revenue": 1168.7,
+          "vehicles": 160.67
         },
         "current": {
           "by_class": {
             "Buses": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 14.4,
+              "vehicles": 1
             },
             "Car": {
-              "revenue": 30,
-              "vehicles": 13.33
+              "revenue": 537,
+              "vehicles": 59.67
             },
             "Motorcycles": {
               "revenue": 0,
@@ -801,651 +801,93 @@
               "vehicles": 0
             },
             "Single Unit Trucks": {
-              "revenue": 2.4,
-              "vehicles": 0.67
+              "revenue": 19.2,
+              "vehicles": 1.33
             },
             "Taxi": {
-              "revenue": 11.5,
-              "vehicles": 15.33
+              "revenue": 13.75,
+              "vehicles": 18.33
             }
           },
-          "total_revenue": 43.9,
-          "total_vehicles": 29.33
+          "total_revenue": 584.35,
+          "total_vehicles": 80.33
         }
       },
       "East 60th St": {
         "cumulative": {
           "by_class": {
             "Buses": {
-              "revenue": 7.2,
-              "vehicles": 2
+              "revenue": 297.6,
+              "vehicles": 20.67
             },
             "Car": {
-              "revenue": 306,
-              "vehicles": 136
+              "revenue": 1668,
+              "vehicles": 185.33
             },
             "Motorcycles": {
-              "revenue": 0.7,
-              "vehicles": 0.67
-            },
-            "Multi Unit Trucks": {
               "revenue": 0,
               "vehicles": 0
             },
+            "Multi Unit Trucks": {
+              "revenue": 43.2,
+              "vehicles": 2
+            },
             "Single Unit Trucks": {
-              "revenue": 26.4,
-              "vehicles": 7.33
+              "revenue": 432,
+              "vehicles": 30
             },
             "Taxi": {
-              "revenue": 119.5,
-              "vehicles": 159.33
+              "revenue": 91.5,
+              "vehicles": 122
             }
           },
-          "revenue": 459.8,
-          "vehicles": 305.33
+          "revenue": 2532.3,
+          "vehicles": 360
         },
         "current": {
           "by_class": {
             "Buses": {
-              "revenue": 3.6,
-              "vehicles": 1
+              "revenue": 148.8,
+              "vehicles": 10.33
             },
             "Car": {
-              "revenue": 153,
-              "vehicles": 68
+              "revenue": 834,
+              "vehicles": 92.67
             },
             "Motorcycles": {
-              "revenue": 0.35,
-              "vehicles": 0.33
-            },
-            "Multi Unit Trucks": {
               "revenue": 0,
               "vehicles": 0
             },
+            "Multi Unit Trucks": {
+              "revenue": 21.6,
+              "vehicles": 1
+            },
             "Single Unit Trucks": {
-              "revenue": 13.2,
-              "vehicles": 3.67
+              "revenue": 216,
+              "vehicles": 15
             },
             "Taxi": {
-              "revenue": 59.75,
-              "vehicles": 79.67
+              "revenue": 45.75,
+              "vehicles": 61
             }
           },
-          "total_revenue": 229.9,
-          "total_vehicles": 152.67
+          "total_revenue": 1266.15,
+          "total_vehicles": 180
         }
       },
       "FDR Drive at 60th St": {
         "cumulative": {
           "by_class": {
             "Buses": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Car": {
-              "revenue": 145.5,
-              "vehicles": 64.67
-            },
-            "Motorcycles": {
-              "revenue": 1.4,
-              "vehicles": 1.33
-            },
-            "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Single Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Taxi": {
-              "revenue": 32.5,
-              "vehicles": 43.33
-            }
-          },
-          "revenue": 179.4,
-          "vehicles": 109.33
-        },
-        "current": {
-          "by_class": {
-            "Buses": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Car": {
-              "revenue": 72.75,
-              "vehicles": 32.33
-            },
-            "Motorcycles": {
-              "revenue": 0.7,
-              "vehicles": 0.67
-            },
-            "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Single Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Taxi": {
-              "revenue": 16.25,
-              "vehicles": 21.67
-            }
-          },
-          "total_revenue": 89.7,
-          "total_vehicles": 54.67
-        }
-      },
-      "Holland Tunnel": {
-        "cumulative": {
-          "by_class": {
-            "Buses": {
-              "revenue": 2.4,
-              "vehicles": 0.67
-            },
-            "Car": {
-              "revenue": 42,
-              "vehicles": 18.67
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Single Unit Trucks": {
-              "revenue": 12,
-              "vehicles": 3.33
-            },
-            "Taxi": {
-              "revenue": 33,
-              "vehicles": 44
-            }
-          },
-          "revenue": 89.4,
-          "vehicles": 66.67
-        },
-        "current": {
-          "by_class": {
-            "Buses": {
-              "revenue": 1.2,
-              "vehicles": 0.33
-            },
-            "Car": {
-              "revenue": 21,
-              "vehicles": 9.33
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Single Unit Trucks": {
-              "revenue": 6,
-              "vehicles": 1.67
-            },
-            "Taxi": {
-              "revenue": 16.5,
-              "vehicles": 22
-            }
-          },
-          "total_revenue": 44.7,
-          "total_vehicles": 33.33
-        }
-      },
-      "Hugh L. Carey Tunnel": {
-        "cumulative": {
-          "by_class": {
-            "Buses": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Car": {
-              "revenue": 18,
-              "vehicles": 8
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Single Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Taxi": {
-              "revenue": 1.5,
-              "vehicles": 2
-            }
-          },
-          "revenue": 19.5,
-          "vehicles": 10
-        },
-        "current": {
-          "by_class": {
-            "Buses": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Car": {
-              "revenue": 9,
+              "revenue": 57.6,
               "vehicles": 4
             },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Single Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Taxi": {
-              "revenue": 0.75,
-              "vehicles": 1
-            }
-          },
-          "total_revenue": 9.75,
-          "total_vehicles": 5
-        }
-      },
-      "Lincoln Tunnel": {
-        "cumulative": {
-          "by_class": {
-            "Buses": {
-              "revenue": 9.6,
-              "vehicles": 2.67
-            },
             "Car": {
-              "revenue": 114,
-              "vehicles": 50.67
+              "revenue": 2190,
+              "vehicles": 243.33
             },
             "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 25.2,
-              "vehicles": 4.67
-            },
-            "Single Unit Trucks": {
-              "revenue": 7.2,
-              "vehicles": 2
-            },
-            "Taxi": {
-              "revenue": 32.5,
-              "vehicles": 43.33
-            }
-          },
-          "revenue": 188.5,
-          "vehicles": 103.33
-        },
-        "current": {
-          "by_class": {
-            "Buses": {
-              "revenue": 4.8,
-              "vehicles": 1.33
-            },
-            "Car": {
-              "revenue": 57,
-              "vehicles": 25.33
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 12.6,
-              "vehicles": 2.33
-            },
-            "Single Unit Trucks": {
-              "revenue": 3.6,
-              "vehicles": 1
-            },
-            "Taxi": {
-              "revenue": 16.25,
-              "vehicles": 21.67
-            }
-          },
-          "total_revenue": 94.25,
-          "total_vehicles": 51.67
-        }
-      },
-      "Manhattan Bridge": {
-        "cumulative": {
-          "by_class": {
-            "Buses": {
-              "revenue": 2.4,
-              "vehicles": 0.67
-            },
-            "Car": {
-              "revenue": 52.5,
-              "vehicles": 23.33
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 3.6,
-              "vehicles": 0.67
-            },
-            "Single Unit Trucks": {
-              "revenue": 4.8,
-              "vehicles": 1.33
-            },
-            "Taxi": {
-              "revenue": 29.5,
-              "vehicles": 39.33
-            }
-          },
-          "revenue": 92.8,
-          "vehicles": 65.33
-        },
-        "current": {
-          "by_class": {
-            "Buses": {
-              "revenue": 1.2,
-              "vehicles": 0.33
-            },
-            "Car": {
-              "revenue": 26.25,
-              "vehicles": 11.67
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 1.8,
-              "vehicles": 0.33
-            },
-            "Single Unit Trucks": {
-              "revenue": 2.4,
-              "vehicles": 0.67
-            },
-            "Taxi": {
-              "revenue": 14.75,
-              "vehicles": 19.67
-            }
-          },
-          "total_revenue": 46.4,
-          "total_vehicles": 32.67
-        }
-      },
-      "Queens Midtown Tunnel": {
-        "cumulative": {
-          "by_class": {
-            "Buses": {
-              "revenue": 2.4,
-              "vehicles": 0.67
-            },
-            "Car": {
-              "revenue": 25.5,
-              "vehicles": 11.33
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Single Unit Trucks": {
-              "revenue": 7.2,
-              "vehicles": 2
-            },
-            "Taxi": {
-              "revenue": 37,
-              "vehicles": 49.33
-            }
-          },
-          "revenue": 72.1,
-          "vehicles": 63.33
-        },
-        "current": {
-          "by_class": {
-            "Buses": {
-              "revenue": 1.2,
-              "vehicles": 0.33
-            },
-            "Car": {
-              "revenue": 12.75,
-              "vehicles": 5.67
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Single Unit Trucks": {
-              "revenue": 3.6,
-              "vehicles": 1
-            },
-            "Taxi": {
-              "revenue": 18.5,
-              "vehicles": 24.67
-            }
-          },
-          "total_revenue": 36.05,
-          "total_vehicles": 31.67
-        }
-      },
-      "Queensboro Bridge": {
-        "cumulative": {
-          "by_class": {
-            "Buses": {
-              "revenue": 2.4,
-              "vehicles": 0.67
-            },
-            "Car": {
-              "revenue": 96,
-              "vehicles": 42.67
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 7.2,
-              "vehicles": 1.33
-            },
-            "Single Unit Trucks": {
-              "revenue": 2.4,
-              "vehicles": 0.67
-            },
-            "Taxi": {
-              "revenue": 29,
-              "vehicles": 38.67
-            }
-          },
-          "revenue": 137,
-          "vehicles": 84
-        },
-        "current": {
-          "by_class": {
-            "Buses": {
-              "revenue": 1.2,
-              "vehicles": 0.33
-            },
-            "Car": {
-              "revenue": 48,
-              "vehicles": 21.33
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 3.6,
-              "vehicles": 0.67
-            },
-            "Single Unit Trucks": {
-              "revenue": 1.2,
-              "vehicles": 0.33
-            },
-            "Taxi": {
-              "revenue": 14.5,
-              "vehicles": 19.33
-            }
-          },
-          "total_revenue": 68.5,
-          "total_vehicles": 42
-        }
-      },
-      "West 60th St": {
-        "cumulative": {
-          "by_class": {
-            "Buses": {
-              "revenue": 9.6,
-              "vehicles": 2.67
-            },
-            "Car": {
-              "revenue": 81,
-              "vehicles": 36
-            },
-            "Motorcycles": {
-              "revenue": 1.4,
-              "vehicles": 1.33
-            },
-            "Multi Unit Trucks": {
-              "revenue": 7.2,
-              "vehicles": 1.33
-            },
-            "Single Unit Trucks": {
-              "revenue": 2.4,
-              "vehicles": 0.67
-            },
-            "Taxi": {
-              "revenue": 65,
-              "vehicles": 86.67
-            }
-          },
-          "revenue": 166.6,
-          "vehicles": 128.67
-        },
-        "current": {
-          "by_class": {
-            "Buses": {
-              "revenue": 4.8,
-              "vehicles": 1.33
-            },
-            "Car": {
-              "revenue": 40.5,
-              "vehicles": 18
-            },
-            "Motorcycles": {
-              "revenue": 0.7,
-              "vehicles": 0.67
-            },
-            "Multi Unit Trucks": {
-              "revenue": 3.6,
-              "vehicles": 0.67
-            },
-            "Single Unit Trucks": {
-              "revenue": 1.2,
-              "vehicles": 0.33
-            },
-            "Taxi": {
-              "revenue": 32.5,
-              "vehicles": 43.33
-            }
-          },
-          "total_revenue": 83.3,
-          "total_vehicles": 64.33
-        }
-      },
-      "West Side Highway at 60th St": {
-        "cumulative": {
-          "by_class": {
-            "Buses": {
-              "revenue": 2.4,
-              "vehicles": 0.67
-            },
-            "Car": {
-              "revenue": 90,
-              "vehicles": 40
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Single Unit Trucks": {
-              "revenue": 2.4,
-              "vehicles": 0.67
-            },
-            "Taxi": {
-              "revenue": 36.5,
-              "vehicles": 48.67
-            }
-          },
-          "revenue": 131.3,
-          "vehicles": 90
-        },
-        "current": {
-          "by_class": {
-            "Buses": {
-              "revenue": 1.2,
-              "vehicles": 0.33
-            },
-            "Car": {
-              "revenue": 45,
-              "vehicles": 20
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Single Unit Trucks": {
-              "revenue": 1.2,
-              "vehicles": 0.33
-            },
-            "Taxi": {
-              "revenue": 18.25,
-              "vehicles": 24.33
-            }
-          },
-          "total_revenue": 65.65,
-          "total_vehicles": 45
-        }
-      },
-      "Williamsburg Bridge": {
-        "cumulative": {
-          "by_class": {
-            "Buses": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Car": {
-              "revenue": 82.5,
-              "vehicles": 36.67
-            },
-            "Motorcycles": {
-              "revenue": 0.7,
+              "revenue": 3,
               "vehicles": 0.67
             },
             "Multi Unit Trucks": {
@@ -1453,29 +895,29 @@
               "vehicles": 0
             },
             "Single Unit Trucks": {
-              "revenue": 7.2,
-              "vehicles": 2
+              "revenue": 57.6,
+              "vehicles": 4
             },
             "Taxi": {
               "revenue": 58.5,
               "vehicles": 78
             }
           },
-          "revenue": 148.9,
-          "vehicles": 117.33
+          "revenue": 2366.7,
+          "vehicles": 330
         },
         "current": {
           "by_class": {
             "Buses": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 28.8,
+              "vehicles": 2
             },
             "Car": {
-              "revenue": 41.25,
-              "vehicles": 18.33
+              "revenue": 1095,
+              "vehicles": 121.67
             },
             "Motorcycles": {
-              "revenue": 0.35,
+              "revenue": 1.5,
               "vehicles": 0.33
             },
             "Multi Unit Trucks": {
@@ -1483,21 +925,579 @@
               "vehicles": 0
             },
             "Single Unit Trucks": {
-              "revenue": 3.6,
-              "vehicles": 1
+              "revenue": 28.8,
+              "vehicles": 2
             },
             "Taxi": {
               "revenue": 29.25,
               "vehicles": 39
             }
           },
-          "total_revenue": 74.45,
-          "total_vehicles": 58.67
+          "total_revenue": 1183.35,
+          "total_vehicles": 165
+        }
+      },
+      "Holland Tunnel": {
+        "cumulative": {
+          "by_class": {
+            "Buses": {
+              "revenue": 19.2,
+              "vehicles": 1.33
+            },
+            "Car": {
+              "revenue": 2016,
+              "vehicles": 224
+            },
+            "Motorcycles": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Multi Unit Trucks": {
+              "revenue": 57.6,
+              "vehicles": 2.67
+            },
+            "Single Unit Trucks": {
+              "revenue": 278.4,
+              "vehicles": 19.33
+            },
+            "Taxi": {
+              "revenue": 23.5,
+              "vehicles": 31.33
+            }
+          },
+          "revenue": 2394.7,
+          "vehicles": 278.67
+        },
+        "current": {
+          "by_class": {
+            "Buses": {
+              "revenue": 9.6,
+              "vehicles": 0.67
+            },
+            "Car": {
+              "revenue": 1008,
+              "vehicles": 112
+            },
+            "Motorcycles": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Multi Unit Trucks": {
+              "revenue": 28.8,
+              "vehicles": 1.33
+            },
+            "Single Unit Trucks": {
+              "revenue": 139.2,
+              "vehicles": 9.67
+            },
+            "Taxi": {
+              "revenue": 11.75,
+              "vehicles": 15.67
+            }
+          },
+          "total_revenue": 1197.35,
+          "total_vehicles": 139.33
+        }
+      },
+      "Hugh L. Carey Tunnel": {
+        "cumulative": {
+          "by_class": {
+            "Buses": {
+              "revenue": 172.8,
+              "vehicles": 12
+            },
+            "Car": {
+              "revenue": 1110,
+              "vehicles": 123.33
+            },
+            "Motorcycles": {
+              "revenue": 3,
+              "vehicles": 0.67
+            },
+            "Multi Unit Trucks": {
+              "revenue": 14.4,
+              "vehicles": 0.67
+            },
+            "Single Unit Trucks": {
+              "revenue": 163.2,
+              "vehicles": 11.33
+            },
+            "Taxi": {
+              "revenue": 23.5,
+              "vehicles": 31.33
+            }
+          },
+          "revenue": 1486.9,
+          "vehicles": 179.33
+        },
+        "current": {
+          "by_class": {
+            "Buses": {
+              "revenue": 86.4,
+              "vehicles": 6
+            },
+            "Car": {
+              "revenue": 555,
+              "vehicles": 61.67
+            },
+            "Motorcycles": {
+              "revenue": 1.5,
+              "vehicles": 0.33
+            },
+            "Multi Unit Trucks": {
+              "revenue": 7.2,
+              "vehicles": 0.33
+            },
+            "Single Unit Trucks": {
+              "revenue": 81.6,
+              "vehicles": 5.67
+            },
+            "Taxi": {
+              "revenue": 11.75,
+              "vehicles": 15.67
+            }
+          },
+          "total_revenue": 743.45,
+          "total_vehicles": 89.67
+        }
+      },
+      "Lincoln Tunnel": {
+        "cumulative": {
+          "by_class": {
+            "Buses": {
+              "revenue": 249.6,
+              "vehicles": 17.33
+            },
+            "Car": {
+              "revenue": 3240,
+              "vehicles": 360
+            },
+            "Motorcycles": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Multi Unit Trucks": {
+              "revenue": 57.6,
+              "vehicles": 2.67
+            },
+            "Single Unit Trucks": {
+              "revenue": 720,
+              "vehicles": 50
+            },
+            "Taxi": {
+              "revenue": 19,
+              "vehicles": 25.33
+            }
+          },
+          "revenue": 4286.2,
+          "vehicles": 455.33
+        },
+        "current": {
+          "by_class": {
+            "Buses": {
+              "revenue": 124.8,
+              "vehicles": 8.67
+            },
+            "Car": {
+              "revenue": 1620,
+              "vehicles": 180
+            },
+            "Motorcycles": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Multi Unit Trucks": {
+              "revenue": 28.8,
+              "vehicles": 1.33
+            },
+            "Single Unit Trucks": {
+              "revenue": 360,
+              "vehicles": 25
+            },
+            "Taxi": {
+              "revenue": 9.5,
+              "vehicles": 12.67
+            }
+          },
+          "total_revenue": 2143.1,
+          "total_vehicles": 227.67
+        }
+      },
+      "Manhattan Bridge": {
+        "cumulative": {
+          "by_class": {
+            "Buses": {
+              "revenue": 144,
+              "vehicles": 10
+            },
+            "Car": {
+              "revenue": 996,
+              "vehicles": 110.67
+            },
+            "Motorcycles": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Multi Unit Trucks": {
+              "revenue": 57.6,
+              "vehicles": 2.67
+            },
+            "Single Unit Trucks": {
+              "revenue": 326.4,
+              "vehicles": 22.67
+            },
+            "Taxi": {
+              "revenue": 24,
+              "vehicles": 32
+            }
+          },
+          "revenue": 1548,
+          "vehicles": 178
+        },
+        "current": {
+          "by_class": {
+            "Buses": {
+              "revenue": 72,
+              "vehicles": 5
+            },
+            "Car": {
+              "revenue": 498,
+              "vehicles": 55.33
+            },
+            "Motorcycles": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Multi Unit Trucks": {
+              "revenue": 28.8,
+              "vehicles": 1.33
+            },
+            "Single Unit Trucks": {
+              "revenue": 163.2,
+              "vehicles": 11.33
+            },
+            "Taxi": {
+              "revenue": 12,
+              "vehicles": 16
+            }
+          },
+          "total_revenue": 774,
+          "total_vehicles": 89
+        }
+      },
+      "Queens Midtown Tunnel": {
+        "cumulative": {
+          "by_class": {
+            "Buses": {
+              "revenue": 67.2,
+              "vehicles": 4.67
+            },
+            "Car": {
+              "revenue": 1560,
+              "vehicles": 173.33
+            },
+            "Motorcycles": {
+              "revenue": 3,
+              "vehicles": 0.67
+            },
+            "Multi Unit Trucks": {
+              "revenue": 14.4,
+              "vehicles": 0.67
+            },
+            "Single Unit Trucks": {
+              "revenue": 537.6,
+              "vehicles": 37.33
+            },
+            "Taxi": {
+              "revenue": 42.5,
+              "vehicles": 56.67
+            }
+          },
+          "revenue": 2224.7,
+          "vehicles": 273.33
+        },
+        "current": {
+          "by_class": {
+            "Buses": {
+              "revenue": 33.6,
+              "vehicles": 2.33
+            },
+            "Car": {
+              "revenue": 780,
+              "vehicles": 86.67
+            },
+            "Motorcycles": {
+              "revenue": 1.5,
+              "vehicles": 0.33
+            },
+            "Multi Unit Trucks": {
+              "revenue": 7.2,
+              "vehicles": 0.33
+            },
+            "Single Unit Trucks": {
+              "revenue": 268.8,
+              "vehicles": 18.67
+            },
+            "Taxi": {
+              "revenue": 21.25,
+              "vehicles": 28.33
+            }
+          },
+          "total_revenue": 1112.35,
+          "total_vehicles": 136.67
+        }
+      },
+      "Queensboro Bridge": {
+        "cumulative": {
+          "by_class": {
+            "Buses": {
+              "revenue": 48,
+              "vehicles": 3.33
+            },
+            "Car": {
+              "revenue": 1452,
+              "vehicles": 161.33
+            },
+            "Motorcycles": {
+              "revenue": 9,
+              "vehicles": 2
+            },
+            "Multi Unit Trucks": {
+              "revenue": 28.8,
+              "vehicles": 1.33
+            },
+            "Single Unit Trucks": {
+              "revenue": 374.4,
+              "vehicles": 26
+            },
+            "Taxi": {
+              "revenue": 60,
+              "vehicles": 80
+            }
+          },
+          "revenue": 1972.2,
+          "vehicles": 274
+        },
+        "current": {
+          "by_class": {
+            "Buses": {
+              "revenue": 24,
+              "vehicles": 1.67
+            },
+            "Car": {
+              "revenue": 726,
+              "vehicles": 80.67
+            },
+            "Motorcycles": {
+              "revenue": 4.5,
+              "vehicles": 1
+            },
+            "Multi Unit Trucks": {
+              "revenue": 14.4,
+              "vehicles": 0.67
+            },
+            "Single Unit Trucks": {
+              "revenue": 187.2,
+              "vehicles": 13
+            },
+            "Taxi": {
+              "revenue": 30,
+              "vehicles": 40
+            }
+          },
+          "total_revenue": 986.1,
+          "total_vehicles": 137
+        }
+      },
+      "West 60th St": {
+        "cumulative": {
+          "by_class": {
+            "Buses": {
+              "revenue": 96,
+              "vehicles": 6.67
+            },
+            "Car": {
+              "revenue": 558,
+              "vehicles": 62
+            },
+            "Motorcycles": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Multi Unit Trucks": {
+              "revenue": 14.4,
+              "vehicles": 0.67
+            },
+            "Single Unit Trucks": {
+              "revenue": 153.6,
+              "vehicles": 10.67
+            },
+            "Taxi": {
+              "revenue": 52.5,
+              "vehicles": 70
+            }
+          },
+          "revenue": 874.5,
+          "vehicles": 150
+        },
+        "current": {
+          "by_class": {
+            "Buses": {
+              "revenue": 48,
+              "vehicles": 3.33
+            },
+            "Car": {
+              "revenue": 279,
+              "vehicles": 31
+            },
+            "Motorcycles": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Multi Unit Trucks": {
+              "revenue": 7.2,
+              "vehicles": 0.33
+            },
+            "Single Unit Trucks": {
+              "revenue": 76.8,
+              "vehicles": 5.33
+            },
+            "Taxi": {
+              "revenue": 26.25,
+              "vehicles": 35
+            }
+          },
+          "total_revenue": 437.25,
+          "total_vehicles": 75
+        }
+      },
+      "West Side Highway at 60th St": {
+        "cumulative": {
+          "by_class": {
+            "Buses": {
+              "revenue": 76.8,
+              "vehicles": 5.33
+            },
+            "Car": {
+              "revenue": 2928,
+              "vehicles": 325.33
+            },
+            "Motorcycles": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Multi Unit Trucks": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Single Unit Trucks": {
+              "revenue": 57.6,
+              "vehicles": 4
+            },
+            "Taxi": {
+              "revenue": 33,
+              "vehicles": 44
+            }
+          },
+          "revenue": 3095.4,
+          "vehicles": 378.67
+        },
+        "current": {
+          "by_class": {
+            "Buses": {
+              "revenue": 38.4,
+              "vehicles": 2.67
+            },
+            "Car": {
+              "revenue": 1464,
+              "vehicles": 162.67
+            },
+            "Motorcycles": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Multi Unit Trucks": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Single Unit Trucks": {
+              "revenue": 28.8,
+              "vehicles": 2
+            },
+            "Taxi": {
+              "revenue": 16.5,
+              "vehicles": 22
+            }
+          },
+          "total_revenue": 1547.7,
+          "total_vehicles": 189.33
+        }
+      },
+      "Williamsburg Bridge": {
+        "cumulative": {
+          "by_class": {
+            "Buses": {
+              "revenue": 67.2,
+              "vehicles": 4.67
+            },
+            "Car": {
+              "revenue": 1368,
+              "vehicles": 152
+            },
+            "Motorcycles": {
+              "revenue": 6,
+              "vehicles": 1.33
+            },
+            "Multi Unit Trucks": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Single Unit Trucks": {
+              "revenue": 288,
+              "vehicles": 20
+            },
+            "Taxi": {
+              "revenue": 33,
+              "vehicles": 44
+            }
+          },
+          "revenue": 1762.2,
+          "vehicles": 222
+        },
+        "current": {
+          "by_class": {
+            "Buses": {
+              "revenue": 33.6,
+              "vehicles": 2.33
+            },
+            "Car": {
+              "revenue": 684,
+              "vehicles": 76
+            },
+            "Motorcycles": {
+              "revenue": 3,
+              "vehicles": 0.67
+            },
+            "Multi Unit Trucks": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Single Unit Trucks": {
+              "revenue": 144,
+              "vehicles": 10
+            },
+            "Taxi": {
+              "revenue": 16.5,
+              "vehicles": 22
+            }
+          },
+          "total_revenue": 881.1,
+          "total_vehicles": 111
         }
       }
     },
     "scale": 1,
-    "timestamp": "2025-03-05 00:03:20"
+    "timestamp": "2025-01-07 07:03:20"
   },
   {
     "locations": {
@@ -1505,12 +1505,12 @@
         "cumulative": {
           "by_class": {
             "Buses": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 43.2,
+              "vehicles": 3
             },
             "Car": {
-              "revenue": 90,
-              "vehicles": 40
+              "revenue": 1611,
+              "vehicles": 179
             },
             "Motorcycles": {
               "revenue": 0,
@@ -1521,26 +1521,26 @@
               "vehicles": 0
             },
             "Single Unit Trucks": {
-              "revenue": 7.2,
-              "vehicles": 2
+              "revenue": 57.6,
+              "vehicles": 4
             },
             "Taxi": {
-              "revenue": 34.5,
-              "vehicles": 46
+              "revenue": 41.25,
+              "vehicles": 55
             }
           },
-          "revenue": 131.7,
-          "vehicles": 88
+          "revenue": 1753.05,
+          "vehicles": 241
         },
         "current": {
           "by_class": {
             "Buses": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 14.4,
+              "vehicles": 1
             },
             "Car": {
-              "revenue": 30,
-              "vehicles": 13.33
+              "revenue": 537,
+              "vehicles": 59.67
             },
             "Motorcycles": {
               "revenue": 0,
@@ -1551,651 +1551,93 @@
               "vehicles": 0
             },
             "Single Unit Trucks": {
-              "revenue": 2.4,
-              "vehicles": 0.67
+              "revenue": 19.2,
+              "vehicles": 1.33
             },
             "Taxi": {
-              "revenue": 11.5,
-              "vehicles": 15.33
+              "revenue": 13.75,
+              "vehicles": 18.33
             }
           },
-          "total_revenue": 43.9,
-          "total_vehicles": 29.33
+          "total_revenue": 584.35,
+          "total_vehicles": 80.33
         }
       },
       "East 60th St": {
         "cumulative": {
           "by_class": {
             "Buses": {
-              "revenue": 10.8,
-              "vehicles": 3
+              "revenue": 446.4,
+              "vehicles": 31
             },
             "Car": {
-              "revenue": 459,
-              "vehicles": 204
+              "revenue": 2502,
+              "vehicles": 278
             },
             "Motorcycles": {
-              "revenue": 1.05,
-              "vehicles": 1
-            },
-            "Multi Unit Trucks": {
               "revenue": 0,
               "vehicles": 0
             },
+            "Multi Unit Trucks": {
+              "revenue": 64.8,
+              "vehicles": 3
+            },
             "Single Unit Trucks": {
-              "revenue": 39.6,
-              "vehicles": 11
+              "revenue": 648,
+              "vehicles": 45
             },
             "Taxi": {
-              "revenue": 179.25,
-              "vehicles": 239
+              "revenue": 137.25,
+              "vehicles": 183
             }
           },
-          "revenue": 689.7,
-          "vehicles": 458
+          "revenue": 3798.45,
+          "vehicles": 540
         },
         "current": {
           "by_class": {
             "Buses": {
-              "revenue": 3.6,
-              "vehicles": 1
+              "revenue": 148.8,
+              "vehicles": 10.33
             },
             "Car": {
-              "revenue": 153,
-              "vehicles": 68
+              "revenue": 834,
+              "vehicles": 92.67
             },
             "Motorcycles": {
-              "revenue": 0.35,
-              "vehicles": 0.33
-            },
-            "Multi Unit Trucks": {
               "revenue": 0,
               "vehicles": 0
             },
+            "Multi Unit Trucks": {
+              "revenue": 21.6,
+              "vehicles": 1
+            },
             "Single Unit Trucks": {
-              "revenue": 13.2,
-              "vehicles": 3.67
+              "revenue": 216,
+              "vehicles": 15
             },
             "Taxi": {
-              "revenue": 59.75,
-              "vehicles": 79.67
+              "revenue": 45.75,
+              "vehicles": 61
             }
           },
-          "total_revenue": 229.9,
-          "total_vehicles": 152.67
+          "total_revenue": 1266.15,
+          "total_vehicles": 180
         }
       },
       "FDR Drive at 60th St": {
         "cumulative": {
           "by_class": {
             "Buses": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 86.4,
+              "vehicles": 6
             },
             "Car": {
-              "revenue": 218.25,
-              "vehicles": 97
+              "revenue": 3285,
+              "vehicles": 365
             },
             "Motorcycles": {
-              "revenue": 2.1,
-              "vehicles": 2
-            },
-            "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Single Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Taxi": {
-              "revenue": 48.75,
-              "vehicles": 65
-            }
-          },
-          "revenue": 269.1,
-          "vehicles": 164
-        },
-        "current": {
-          "by_class": {
-            "Buses": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Car": {
-              "revenue": 72.75,
-              "vehicles": 32.33
-            },
-            "Motorcycles": {
-              "revenue": 0.7,
-              "vehicles": 0.67
-            },
-            "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Single Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Taxi": {
-              "revenue": 16.25,
-              "vehicles": 21.67
-            }
-          },
-          "total_revenue": 89.7,
-          "total_vehicles": 54.67
-        }
-      },
-      "Holland Tunnel": {
-        "cumulative": {
-          "by_class": {
-            "Buses": {
-              "revenue": 3.6,
-              "vehicles": 1
-            },
-            "Car": {
-              "revenue": 63,
-              "vehicles": 28
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Single Unit Trucks": {
-              "revenue": 18,
-              "vehicles": 5
-            },
-            "Taxi": {
-              "revenue": 49.5,
-              "vehicles": 66
-            }
-          },
-          "revenue": 134.1,
-          "vehicles": 100
-        },
-        "current": {
-          "by_class": {
-            "Buses": {
-              "revenue": 1.2,
-              "vehicles": 0.33
-            },
-            "Car": {
-              "revenue": 21,
-              "vehicles": 9.33
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Single Unit Trucks": {
-              "revenue": 6,
-              "vehicles": 1.67
-            },
-            "Taxi": {
-              "revenue": 16.5,
-              "vehicles": 22
-            }
-          },
-          "total_revenue": 44.7,
-          "total_vehicles": 33.33
-        }
-      },
-      "Hugh L. Carey Tunnel": {
-        "cumulative": {
-          "by_class": {
-            "Buses": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Car": {
-              "revenue": 27,
-              "vehicles": 12
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Single Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Taxi": {
-              "revenue": 2.25,
-              "vehicles": 3
-            }
-          },
-          "revenue": 29.25,
-          "vehicles": 15
-        },
-        "current": {
-          "by_class": {
-            "Buses": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Car": {
-              "revenue": 9,
-              "vehicles": 4
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Single Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Taxi": {
-              "revenue": 0.75,
-              "vehicles": 1
-            }
-          },
-          "total_revenue": 9.75,
-          "total_vehicles": 5
-        }
-      },
-      "Lincoln Tunnel": {
-        "cumulative": {
-          "by_class": {
-            "Buses": {
-              "revenue": 14.4,
-              "vehicles": 4
-            },
-            "Car": {
-              "revenue": 171,
-              "vehicles": 76
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 37.8,
-              "vehicles": 7
-            },
-            "Single Unit Trucks": {
-              "revenue": 10.8,
-              "vehicles": 3
-            },
-            "Taxi": {
-              "revenue": 48.75,
-              "vehicles": 65
-            }
-          },
-          "revenue": 282.75,
-          "vehicles": 155
-        },
-        "current": {
-          "by_class": {
-            "Buses": {
-              "revenue": 4.8,
-              "vehicles": 1.33
-            },
-            "Car": {
-              "revenue": 57,
-              "vehicles": 25.33
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 12.6,
-              "vehicles": 2.33
-            },
-            "Single Unit Trucks": {
-              "revenue": 3.6,
-              "vehicles": 1
-            },
-            "Taxi": {
-              "revenue": 16.25,
-              "vehicles": 21.67
-            }
-          },
-          "total_revenue": 94.25,
-          "total_vehicles": 51.67
-        }
-      },
-      "Manhattan Bridge": {
-        "cumulative": {
-          "by_class": {
-            "Buses": {
-              "revenue": 3.6,
-              "vehicles": 1
-            },
-            "Car": {
-              "revenue": 78.75,
-              "vehicles": 35
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 5.4,
-              "vehicles": 1
-            },
-            "Single Unit Trucks": {
-              "revenue": 7.2,
-              "vehicles": 2
-            },
-            "Taxi": {
-              "revenue": 44.25,
-              "vehicles": 59
-            }
-          },
-          "revenue": 139.2,
-          "vehicles": 98
-        },
-        "current": {
-          "by_class": {
-            "Buses": {
-              "revenue": 1.2,
-              "vehicles": 0.33
-            },
-            "Car": {
-              "revenue": 26.25,
-              "vehicles": 11.67
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 1.8,
-              "vehicles": 0.33
-            },
-            "Single Unit Trucks": {
-              "revenue": 2.4,
-              "vehicles": 0.67
-            },
-            "Taxi": {
-              "revenue": 14.75,
-              "vehicles": 19.67
-            }
-          },
-          "total_revenue": 46.4,
-          "total_vehicles": 32.67
-        }
-      },
-      "Queens Midtown Tunnel": {
-        "cumulative": {
-          "by_class": {
-            "Buses": {
-              "revenue": 3.6,
-              "vehicles": 1
-            },
-            "Car": {
-              "revenue": 38.25,
-              "vehicles": 17
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Single Unit Trucks": {
-              "revenue": 10.8,
-              "vehicles": 3
-            },
-            "Taxi": {
-              "revenue": 55.5,
-              "vehicles": 74
-            }
-          },
-          "revenue": 108.15,
-          "vehicles": 95
-        },
-        "current": {
-          "by_class": {
-            "Buses": {
-              "revenue": 1.2,
-              "vehicles": 0.33
-            },
-            "Car": {
-              "revenue": 12.75,
-              "vehicles": 5.67
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Single Unit Trucks": {
-              "revenue": 3.6,
-              "vehicles": 1
-            },
-            "Taxi": {
-              "revenue": 18.5,
-              "vehicles": 24.67
-            }
-          },
-          "total_revenue": 36.05,
-          "total_vehicles": 31.67
-        }
-      },
-      "Queensboro Bridge": {
-        "cumulative": {
-          "by_class": {
-            "Buses": {
-              "revenue": 3.6,
-              "vehicles": 1
-            },
-            "Car": {
-              "revenue": 144,
-              "vehicles": 64
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 10.8,
-              "vehicles": 2
-            },
-            "Single Unit Trucks": {
-              "revenue": 3.6,
-              "vehicles": 1
-            },
-            "Taxi": {
-              "revenue": 43.5,
-              "vehicles": 58
-            }
-          },
-          "revenue": 205.5,
-          "vehicles": 126
-        },
-        "current": {
-          "by_class": {
-            "Buses": {
-              "revenue": 1.2,
-              "vehicles": 0.33
-            },
-            "Car": {
-              "revenue": 48,
-              "vehicles": 21.33
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 3.6,
-              "vehicles": 0.67
-            },
-            "Single Unit Trucks": {
-              "revenue": 1.2,
-              "vehicles": 0.33
-            },
-            "Taxi": {
-              "revenue": 14.5,
-              "vehicles": 19.33
-            }
-          },
-          "total_revenue": 68.5,
-          "total_vehicles": 42
-        }
-      },
-      "West 60th St": {
-        "cumulative": {
-          "by_class": {
-            "Buses": {
-              "revenue": 14.4,
-              "vehicles": 4
-            },
-            "Car": {
-              "revenue": 121.5,
-              "vehicles": 54
-            },
-            "Motorcycles": {
-              "revenue": 2.1,
-              "vehicles": 2
-            },
-            "Multi Unit Trucks": {
-              "revenue": 10.8,
-              "vehicles": 2
-            },
-            "Single Unit Trucks": {
-              "revenue": 3.6,
-              "vehicles": 1
-            },
-            "Taxi": {
-              "revenue": 97.5,
-              "vehicles": 130
-            }
-          },
-          "revenue": 249.9,
-          "vehicles": 193
-        },
-        "current": {
-          "by_class": {
-            "Buses": {
-              "revenue": 4.8,
-              "vehicles": 1.33
-            },
-            "Car": {
-              "revenue": 40.5,
-              "vehicles": 18
-            },
-            "Motorcycles": {
-              "revenue": 0.7,
-              "vehicles": 0.67
-            },
-            "Multi Unit Trucks": {
-              "revenue": 3.6,
-              "vehicles": 0.67
-            },
-            "Single Unit Trucks": {
-              "revenue": 1.2,
-              "vehicles": 0.33
-            },
-            "Taxi": {
-              "revenue": 32.5,
-              "vehicles": 43.33
-            }
-          },
-          "total_revenue": 83.3,
-          "total_vehicles": 64.33
-        }
-      },
-      "West Side Highway at 60th St": {
-        "cumulative": {
-          "by_class": {
-            "Buses": {
-              "revenue": 3.6,
-              "vehicles": 1
-            },
-            "Car": {
-              "revenue": 135,
-              "vehicles": 60
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Single Unit Trucks": {
-              "revenue": 3.6,
-              "vehicles": 1
-            },
-            "Taxi": {
-              "revenue": 54.75,
-              "vehicles": 73
-            }
-          },
-          "revenue": 196.95,
-          "vehicles": 135
-        },
-        "current": {
-          "by_class": {
-            "Buses": {
-              "revenue": 1.2,
-              "vehicles": 0.33
-            },
-            "Car": {
-              "revenue": 45,
-              "vehicles": 20
-            },
-            "Motorcycles": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Multi Unit Trucks": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Single Unit Trucks": {
-              "revenue": 1.2,
-              "vehicles": 0.33
-            },
-            "Taxi": {
-              "revenue": 18.25,
-              "vehicles": 24.33
-            }
-          },
-          "total_revenue": 65.65,
-          "total_vehicles": 45
-        }
-      },
-      "Williamsburg Bridge": {
-        "cumulative": {
-          "by_class": {
-            "Buses": {
-              "revenue": 0,
-              "vehicles": 0
-            },
-            "Car": {
-              "revenue": 123.75,
-              "vehicles": 55
-            },
-            "Motorcycles": {
-              "revenue": 1.05,
+              "revenue": 4.5,
               "vehicles": 1
             },
             "Multi Unit Trucks": {
@@ -2203,29 +1645,29 @@
               "vehicles": 0
             },
             "Single Unit Trucks": {
-              "revenue": 10.8,
-              "vehicles": 3
+              "revenue": 86.4,
+              "vehicles": 6
             },
             "Taxi": {
               "revenue": 87.75,
               "vehicles": 117
             }
           },
-          "revenue": 223.35,
-          "vehicles": 176
+          "revenue": 3550.05,
+          "vehicles": 495
         },
         "current": {
           "by_class": {
             "Buses": {
-              "revenue": 0,
-              "vehicles": 0
+              "revenue": 28.8,
+              "vehicles": 2
             },
             "Car": {
-              "revenue": 41.25,
-              "vehicles": 18.33
+              "revenue": 1095,
+              "vehicles": 121.67
             },
             "Motorcycles": {
-              "revenue": 0.35,
+              "revenue": 1.5,
               "vehicles": 0.33
             },
             "Multi Unit Trucks": {
@@ -2233,20 +1675,578 @@
               "vehicles": 0
             },
             "Single Unit Trucks": {
-              "revenue": 3.6,
-              "vehicles": 1
+              "revenue": 28.8,
+              "vehicles": 2
             },
             "Taxi": {
               "revenue": 29.25,
               "vehicles": 39
             }
           },
-          "total_revenue": 74.45,
-          "total_vehicles": 58.67
+          "total_revenue": 1183.35,
+          "total_vehicles": 165
+        }
+      },
+      "Holland Tunnel": {
+        "cumulative": {
+          "by_class": {
+            "Buses": {
+              "revenue": 28.8,
+              "vehicles": 2
+            },
+            "Car": {
+              "revenue": 3024,
+              "vehicles": 336
+            },
+            "Motorcycles": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Multi Unit Trucks": {
+              "revenue": 86.4,
+              "vehicles": 4
+            },
+            "Single Unit Trucks": {
+              "revenue": 417.6,
+              "vehicles": 29
+            },
+            "Taxi": {
+              "revenue": 35.25,
+              "vehicles": 47
+            }
+          },
+          "revenue": 3592.05,
+          "vehicles": 418
+        },
+        "current": {
+          "by_class": {
+            "Buses": {
+              "revenue": 9.6,
+              "vehicles": 0.67
+            },
+            "Car": {
+              "revenue": 1008,
+              "vehicles": 112
+            },
+            "Motorcycles": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Multi Unit Trucks": {
+              "revenue": 28.8,
+              "vehicles": 1.33
+            },
+            "Single Unit Trucks": {
+              "revenue": 139.2,
+              "vehicles": 9.67
+            },
+            "Taxi": {
+              "revenue": 11.75,
+              "vehicles": 15.67
+            }
+          },
+          "total_revenue": 1197.35,
+          "total_vehicles": 139.33
+        }
+      },
+      "Hugh L. Carey Tunnel": {
+        "cumulative": {
+          "by_class": {
+            "Buses": {
+              "revenue": 259.2,
+              "vehicles": 18
+            },
+            "Car": {
+              "revenue": 1665,
+              "vehicles": 185
+            },
+            "Motorcycles": {
+              "revenue": 4.5,
+              "vehicles": 1
+            },
+            "Multi Unit Trucks": {
+              "revenue": 21.6,
+              "vehicles": 1
+            },
+            "Single Unit Trucks": {
+              "revenue": 244.8,
+              "vehicles": 17
+            },
+            "Taxi": {
+              "revenue": 35.25,
+              "vehicles": 47
+            }
+          },
+          "revenue": 2230.35,
+          "vehicles": 269
+        },
+        "current": {
+          "by_class": {
+            "Buses": {
+              "revenue": 86.4,
+              "vehicles": 6
+            },
+            "Car": {
+              "revenue": 555,
+              "vehicles": 61.67
+            },
+            "Motorcycles": {
+              "revenue": 1.5,
+              "vehicles": 0.33
+            },
+            "Multi Unit Trucks": {
+              "revenue": 7.2,
+              "vehicles": 0.33
+            },
+            "Single Unit Trucks": {
+              "revenue": 81.6,
+              "vehicles": 5.67
+            },
+            "Taxi": {
+              "revenue": 11.75,
+              "vehicles": 15.67
+            }
+          },
+          "total_revenue": 743.45,
+          "total_vehicles": 89.67
+        }
+      },
+      "Lincoln Tunnel": {
+        "cumulative": {
+          "by_class": {
+            "Buses": {
+              "revenue": 374.4,
+              "vehicles": 26
+            },
+            "Car": {
+              "revenue": 4860,
+              "vehicles": 540
+            },
+            "Motorcycles": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Multi Unit Trucks": {
+              "revenue": 86.4,
+              "vehicles": 4
+            },
+            "Single Unit Trucks": {
+              "revenue": 1080,
+              "vehicles": 75
+            },
+            "Taxi": {
+              "revenue": 28.5,
+              "vehicles": 38
+            }
+          },
+          "revenue": 6429.3,
+          "vehicles": 683
+        },
+        "current": {
+          "by_class": {
+            "Buses": {
+              "revenue": 124.8,
+              "vehicles": 8.67
+            },
+            "Car": {
+              "revenue": 1620,
+              "vehicles": 180
+            },
+            "Motorcycles": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Multi Unit Trucks": {
+              "revenue": 28.8,
+              "vehicles": 1.33
+            },
+            "Single Unit Trucks": {
+              "revenue": 360,
+              "vehicles": 25
+            },
+            "Taxi": {
+              "revenue": 9.5,
+              "vehicles": 12.67
+            }
+          },
+          "total_revenue": 2143.1,
+          "total_vehicles": 227.67
+        }
+      },
+      "Manhattan Bridge": {
+        "cumulative": {
+          "by_class": {
+            "Buses": {
+              "revenue": 216,
+              "vehicles": 15
+            },
+            "Car": {
+              "revenue": 1494,
+              "vehicles": 166
+            },
+            "Motorcycles": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Multi Unit Trucks": {
+              "revenue": 86.4,
+              "vehicles": 4
+            },
+            "Single Unit Trucks": {
+              "revenue": 489.6,
+              "vehicles": 34
+            },
+            "Taxi": {
+              "revenue": 36,
+              "vehicles": 48
+            }
+          },
+          "revenue": 2322,
+          "vehicles": 267
+        },
+        "current": {
+          "by_class": {
+            "Buses": {
+              "revenue": 72,
+              "vehicles": 5
+            },
+            "Car": {
+              "revenue": 498,
+              "vehicles": 55.33
+            },
+            "Motorcycles": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Multi Unit Trucks": {
+              "revenue": 28.8,
+              "vehicles": 1.33
+            },
+            "Single Unit Trucks": {
+              "revenue": 163.2,
+              "vehicles": 11.33
+            },
+            "Taxi": {
+              "revenue": 12,
+              "vehicles": 16
+            }
+          },
+          "total_revenue": 774,
+          "total_vehicles": 89
+        }
+      },
+      "Queens Midtown Tunnel": {
+        "cumulative": {
+          "by_class": {
+            "Buses": {
+              "revenue": 100.8,
+              "vehicles": 7
+            },
+            "Car": {
+              "revenue": 2340,
+              "vehicles": 260
+            },
+            "Motorcycles": {
+              "revenue": 4.5,
+              "vehicles": 1
+            },
+            "Multi Unit Trucks": {
+              "revenue": 21.6,
+              "vehicles": 1
+            },
+            "Single Unit Trucks": {
+              "revenue": 806.4,
+              "vehicles": 56
+            },
+            "Taxi": {
+              "revenue": 63.75,
+              "vehicles": 85
+            }
+          },
+          "revenue": 3337.05,
+          "vehicles": 410
+        },
+        "current": {
+          "by_class": {
+            "Buses": {
+              "revenue": 33.6,
+              "vehicles": 2.33
+            },
+            "Car": {
+              "revenue": 780,
+              "vehicles": 86.67
+            },
+            "Motorcycles": {
+              "revenue": 1.5,
+              "vehicles": 0.33
+            },
+            "Multi Unit Trucks": {
+              "revenue": 7.2,
+              "vehicles": 0.33
+            },
+            "Single Unit Trucks": {
+              "revenue": 268.8,
+              "vehicles": 18.67
+            },
+            "Taxi": {
+              "revenue": 21.25,
+              "vehicles": 28.33
+            }
+          },
+          "total_revenue": 1112.35,
+          "total_vehicles": 136.67
+        }
+      },
+      "Queensboro Bridge": {
+        "cumulative": {
+          "by_class": {
+            "Buses": {
+              "revenue": 72,
+              "vehicles": 5
+            },
+            "Car": {
+              "revenue": 2178,
+              "vehicles": 242
+            },
+            "Motorcycles": {
+              "revenue": 13.5,
+              "vehicles": 3
+            },
+            "Multi Unit Trucks": {
+              "revenue": 43.2,
+              "vehicles": 2
+            },
+            "Single Unit Trucks": {
+              "revenue": 561.6,
+              "vehicles": 39
+            },
+            "Taxi": {
+              "revenue": 90,
+              "vehicles": 120
+            }
+          },
+          "revenue": 2958.3,
+          "vehicles": 411
+        },
+        "current": {
+          "by_class": {
+            "Buses": {
+              "revenue": 24,
+              "vehicles": 1.67
+            },
+            "Car": {
+              "revenue": 726,
+              "vehicles": 80.67
+            },
+            "Motorcycles": {
+              "revenue": 4.5,
+              "vehicles": 1
+            },
+            "Multi Unit Trucks": {
+              "revenue": 14.4,
+              "vehicles": 0.67
+            },
+            "Single Unit Trucks": {
+              "revenue": 187.2,
+              "vehicles": 13
+            },
+            "Taxi": {
+              "revenue": 30,
+              "vehicles": 40
+            }
+          },
+          "total_revenue": 986.1,
+          "total_vehicles": 137
+        }
+      },
+      "West 60th St": {
+        "cumulative": {
+          "by_class": {
+            "Buses": {
+              "revenue": 144,
+              "vehicles": 10
+            },
+            "Car": {
+              "revenue": 837,
+              "vehicles": 93
+            },
+            "Motorcycles": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Multi Unit Trucks": {
+              "revenue": 21.6,
+              "vehicles": 1
+            },
+            "Single Unit Trucks": {
+              "revenue": 230.4,
+              "vehicles": 16
+            },
+            "Taxi": {
+              "revenue": 78.75,
+              "vehicles": 105
+            }
+          },
+          "revenue": 1311.75,
+          "vehicles": 225
+        },
+        "current": {
+          "by_class": {
+            "Buses": {
+              "revenue": 48,
+              "vehicles": 3.33
+            },
+            "Car": {
+              "revenue": 279,
+              "vehicles": 31
+            },
+            "Motorcycles": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Multi Unit Trucks": {
+              "revenue": 7.2,
+              "vehicles": 0.33
+            },
+            "Single Unit Trucks": {
+              "revenue": 76.8,
+              "vehicles": 5.33
+            },
+            "Taxi": {
+              "revenue": 26.25,
+              "vehicles": 35
+            }
+          },
+          "total_revenue": 437.25,
+          "total_vehicles": 75
+        }
+      },
+      "West Side Highway at 60th St": {
+        "cumulative": {
+          "by_class": {
+            "Buses": {
+              "revenue": 115.2,
+              "vehicles": 8
+            },
+            "Car": {
+              "revenue": 4392,
+              "vehicles": 488
+            },
+            "Motorcycles": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Multi Unit Trucks": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Single Unit Trucks": {
+              "revenue": 86.4,
+              "vehicles": 6
+            },
+            "Taxi": {
+              "revenue": 49.5,
+              "vehicles": 66
+            }
+          },
+          "revenue": 4643.1,
+          "vehicles": 568
+        },
+        "current": {
+          "by_class": {
+            "Buses": {
+              "revenue": 38.4,
+              "vehicles": 2.67
+            },
+            "Car": {
+              "revenue": 1464,
+              "vehicles": 162.67
+            },
+            "Motorcycles": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Multi Unit Trucks": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Single Unit Trucks": {
+              "revenue": 28.8,
+              "vehicles": 2
+            },
+            "Taxi": {
+              "revenue": 16.5,
+              "vehicles": 22
+            }
+          },
+          "total_revenue": 1547.7,
+          "total_vehicles": 189.33
+        }
+      },
+      "Williamsburg Bridge": {
+        "cumulative": {
+          "by_class": {
+            "Buses": {
+              "revenue": 100.8,
+              "vehicles": 7
+            },
+            "Car": {
+              "revenue": 2052,
+              "vehicles": 228
+            },
+            "Motorcycles": {
+              "revenue": 9,
+              "vehicles": 2
+            },
+            "Multi Unit Trucks": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Single Unit Trucks": {
+              "revenue": 432,
+              "vehicles": 30
+            },
+            "Taxi": {
+              "revenue": 49.5,
+              "vehicles": 66
+            }
+          },
+          "revenue": 2643.3,
+          "vehicles": 333
+        },
+        "current": {
+          "by_class": {
+            "Buses": {
+              "revenue": 33.6,
+              "vehicles": 2.33
+            },
+            "Car": {
+              "revenue": 684,
+              "vehicles": 76
+            },
+            "Motorcycles": {
+              "revenue": 3,
+              "vehicles": 0.67
+            },
+            "Multi Unit Trucks": {
+              "revenue": 0,
+              "vehicles": 0
+            },
+            "Single Unit Trucks": {
+              "revenue": 144,
+              "vehicles": 10
+            },
+            "Taxi": {
+              "revenue": 16.5,
+              "vehicles": 22
+            }
+          },
+          "total_revenue": 881.1,
+          "total_vehicles": 111
         }
       }
     },
     "scale": 1,
-    "timestamp": "2025-03-05 00:06:40"
+    "timestamp": "2025-01-07 07:06:40"
   }
 ]

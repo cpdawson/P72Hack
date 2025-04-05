@@ -290,6 +290,9 @@
                 </button>
             </div>
         </form>
+        <div id="summary-output" style="margin-top: 20px; font-size: 14px;">
+          <!-- Results will go here -->
+      </div>
     </div>
 
     <!-- Leaflet Moving/Rotated Marker plugins -->
@@ -433,34 +436,57 @@
 
 
                 fetch(url, {
-                    method: "GET",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        time_data = data
-                        console.log("Data saved:", time_data);
-                        console.log("about to fetch");
-                        fetch("/save_timestep", {
-                            method: "POST",
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(data)
-                        })
-                            .then(response => response.json())
-                            .then(data => {
-                                console.log("Data saved at save_timestep:", data);
-                            })
-                            .catch(error => {
-                                console.error("Error:", error);
-                            });
-                    })
-                    .catch(error => {
-                        console.error("Error:", error);
-                    });
+    method: "GET",
+    headers: {
+        'Content-Type': 'application/json'
+    },
+})
+.then(response => response.json())
+.then(data => {
+    // ✅ New logic starts here
+    const locations = data[0].locations;
+    const cumulativeSums = {};
+
+    for (const locName in locations) {
+        const byClass = locations[locName].cumulative.by_class;
+
+        for (const vehicleType in byClass) {
+            const { revenue, vehicles } = byClass[vehicleType];
+
+            if (!cumulativeSums[vehicleType]) {
+                cumulativeSums[vehicleType] = { revenue: 0, vehicles: 0 };
+            }
+
+            cumulativeSums[vehicleType].revenue += revenue;
+            cumulativeSums[vehicleType].vehicles += vehicles;
+        }
+    }
+
+    // Display in HTML
+    const summaryOutput = document.getElementById("summary-output");
+    summaryOutput.innerHTML = "<h4>Vehicle Totals (Cumulative)</h4><ul>" +
+        Object.entries(cumulativeSums)
+            .map(([type, { revenue, vehicles }]) =>
+                `<li><strong>${type}</strong>: $${revenue.toFixed(2)} from ${vehicles.toFixed(2)} vehicles</li>`)
+            .join("") +
+        "</ul>";
+
+    // ✅ Optional: still save timestep
+    return fetch("/save_timestep", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+})
+.then(response => response.json())
+.then(data => {
+    console.log("Data saved at save_timestep:", data);
+})
+.catch(error => {
+    console.error("Error:", error);
+});
             });
         });
 
