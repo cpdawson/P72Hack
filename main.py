@@ -195,20 +195,14 @@ def realtime_series():
             "scale": 1,
             "locations": {}
         }
-
-        start_idx = int(i * blocks_per_frame)
-        end_idx = int((i + 1) * blocks_per_frame)
-        fractional = (i + 1) * blocks_per_frame - end_idx
+        
         # Always pull the block the frame overlaps with
         block_index = int(i * blocks_per_frame)
-        print(block_index)
-        print(i)
-        print(blocks_per_frame)
-        print("new block index")
+
         if block_index < len(all_block_times):
             block_time = all_block_times[block_index]
             portion = blocks_per_frame  # portion of block assigned to each frame
-            frame_fraction = min(1.0, portion)  # cap at 1.0 just in case
+            frame_fraction = portion
 
             for location, classes in block_map[block_time].items():
                 if location not in frame_data["locations"]:
