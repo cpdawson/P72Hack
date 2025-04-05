@@ -724,6 +724,8 @@ def build_spawn_js_from_timestepdata(timestep_data, speed=2000, spawn_window=200
                     f"[{route['end'][0]}, {route['end'][1]}], "
                     f"{speed}, "
                     f"'{icon_path}'); "
+                    f"updateTimestep({spawn_time}); "
+
                     f"}}, {spawn_time});"
                 )
                 lines.append(line)

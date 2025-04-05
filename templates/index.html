@@ -387,6 +387,12 @@
             // 4) Insert Python snippet for spawning cars
             {{ selected_car_js | safe }}
         });
+
+        function updateTimestep(timestamp) {
+            console.log(timestamp);
+            const timestepValue = document.getElementById("timestep-value");
+            timestepValue.textContent = timestamp;
+        }
     </script>
 
 
