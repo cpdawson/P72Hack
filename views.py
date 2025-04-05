@@ -29,6 +29,9 @@ def bridge():
         folium.LatLngPopup()
     )
     map_html = m.get_root().render()
+    while True:
+        map_html = m.get_root().render()
+        # print("hi")
     
     
     html_template = f"""
