@@ -4,6 +4,9 @@
 <head>
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+
     <!-- FullCalendar JS -->
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
     <meta charset="utf-8">
@@ -147,6 +150,53 @@
             background-position: right 10px center;
             background-size: 14px;
         }
+
+        .vehicle-selector {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0;
+  justify-content: center;
+}
+
+.icon-submit-row {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center everything together */
+  gap: 30px;
+  margin-top: 20px;
+  flex-wrap: wrap; /* allow wrap on small screens */
+}
+
+.submit-button {
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 6px;
+  background-color: #0a4f98;
+  color: white;
+  border: none;
+  cursor: pointer;
+  height: 100%; /* makes it align nicely with icons */
+}
+
+.icon-radio {
+  position: relative;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.icon-radio input[type="radio"] {
+  display: none;
+}
+
+.icon-radio i {
+  color: #999;
+  transition: color 0.3s, transform 0.2s;
+}
+
+.icon-radio input[type="radio"]:checked + i {
+  color: #0a4f98; /* blue highlight */
+  transform: scale(1.2);
+}
     </style>
 </head>
 
@@ -158,51 +208,78 @@
         <form id="filter-form">
             <div id="calendar"></div>
             <div class="interval-time-row">
-
                 <!-- Time Selector (left) -->
                 <div class="time-wrapper">
-                    <label for="hour">Select time:</label>
-                    <div class="time-selectors">
-                        <select id="hour" name="hour" class="time-selector">
-                            {% for h in range(24) %}
-                            <option value="{{ " %02d"|format(h) }}">{{ "%02d"|format(h) }}</option>
-                            {% endfor %}
-                        </select>
-                        :
-                        <select id="minute" name="minute" class="time-selector">
-                            <option value="00">00</option>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
-                            <option value="40">40</option>
-                            <option value="50">50</option>
-                        </select>
-                    </div>
+                  <label for="hour">Select time:</label>
+                  <div class="time-selectors">
+                    <select id="hour" name="hour" class="time-selector">
+                      {% for h in range(24) %}
+                      <option value="{{ "%02d"|format(h) }}">{{ "%02d"|format(h) }}</option>
+                      {% endfor %}
+                    </select>
+                    :
+                    <select id="minute" name="minute" class="time-selector">
+                      <option value="00">00</option>
+                      <option value="10">10</option>
+                      <option value="20">20</option>
+                      <option value="30">30</option>
+                      <option value="40">40</option>
+                      <option value="50">50</option>
+                    </select>
+                  </div>
                 </div>
-
+              
                 <!-- Interval Selector (right) -->
                 <div class="interval-wrapper">
-                    <label for="interval">Select interval:</label>
-                    <select id="interval" name="interval">
-                        <option value="10min">10 min</option>
-                        <option value="30min">30 min</option>
-                        <option value="1hr">1 hour</option>
-                        <option value="3hr">3 hr</option>
-                        <option value="6hr">6 hr</option>
-                        <option value="1day">1 day</option>
-                        <option value="1week">1 week</option>
-                        <option value="2week">2 week</option>
-                        <option value="1month">1 month</option>
-                        <option value="3months">3 months</option>
-                    </select>
+                  <label for="interval">Select interval:</label>
+                  <select id="interval" name="interval">
+                    <option value="10min">10 min</option>
+                    <option value="30min">30 min</option>
+                    <option value="1hr">1 hour</option>
+                    <option value="3hr">3 hr</option>
+                    <option value="6hr">6 hr</option>
+                    <option value="1day">1 day</option>
+                    <option value="1week">1 week</option>
+                    <option value="2week">2 week</option>
+                    <option value="1month">1 month</option>
+                    <option value="3months">3 months</option>
+                  </select>
                 </div>
-                <button type="submit"
-                    style="margin-top: 12px; padding: 0px 15px; font-size: 14px; border-radius: 6px; background-color: #0a4f98; color: white; border: none; cursor: pointer;">
-                    Submit
+              </div>
+              
+              <!-- ✅ NEW ROW FOR ICONS AND SUBMIT BUTTON -->
+              <div class="icon-submit-row">
+                <div class="vehicle-selector">
+                  <label class="icon-radio">
+                    <input type="radio" name="vehicle" value="car" />
+                    <i class="fas fa-car"></i>
+                  </label>
+                  <label class="icon-radio">
+                    <input type="radio" name="vehicle" value="taxi" />
+                    <i class="fas fa-taxi"></i>
+                  </label>
+                  <label class="icon-radio">
+                    <input type="radio" name="vehicle" value="bus" />
+                    <i class="fas fa-bus"></i>
+                  </label>
+                  <label class="icon-radio">
+                    <input type="radio" name="vehicle" value="motorcycle" />
+                    <i class="fas fa-motorcycle"></i>
+                  </label>
+                  <label class="icon-radio">
+                    <input type="radio" name="vehicle" value="single-truck" />
+                    <i class="fas fa-truck-pickup"></i>
+                  </label>
+                  <label class="icon-radio">
+                    <input type="radio" name="vehicle" value="multi-truck" />
+                    <i class="fas fa-truck-moving"></i>
+                  </label>
+                </div>
+              
+                <button type="submit" class="submit-button">
+                  Submit
                 </button>
-            </div>
-
-
+              </div>                 
         </form>
     </div>
 
@@ -277,82 +354,85 @@
       });
     </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var calendarEl = document.getElementById('calendar');
+   
+<script>
+    let selectedDate = null;
+  
+    document.addEventListener('DOMContentLoaded', function () {
+  const calendarEl = document.getElementById('calendar');
 
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                selectable: true,
-                dateClick: function (info) {
-                    // Remove highlight from all previously selected cells
-                    document.querySelectorAll('.fc-daygrid-day-number').forEach(el => {
-                        el.classList.remove('selected-day-number');
-                    });
+  const calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    selectable: true,
+    dateClick: function (info) {
+      document.querySelectorAll('.fc-daygrid-day-number').forEach(el => {
+        el.classList.remove('selected-day-number');
+      });
 
-                    // Add class to the clicked date number
-                    const dayNumberEl = info.dayEl.querySelector('.fc-daygrid-day-number');
-                    if (dayNumberEl) {
-                        dayNumberEl.classList.add('selected-day-number');
-                    }
-                }
+      const dayNumberEl = info.dayEl.querySelector('.fc-daygrid-day-number');
+      if (dayNumberEl) {
+        dayNumberEl.classList.add('selected-day-number');
+      }
 
+      selectedDate = info.dateStr;
+    }
+  });
 
-            });
+  calendar.render();
 
-            calendar.render();
-        });
+  // ✅ Submit logic with vehicle type mapping
+  document.getElementById("filter-form").addEventListener("submit", function (e) {
+    e.preventDefault();
 
-        let selectedDate = null;
+    if (!selectedDate) {
+      alert("Please select a date on the calendar.");
+      return;
+    }
 
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            selectable: true,
-            dateClick: function (info) {
-                document.querySelectorAll('.fc-daygrid-day-number').forEach(el => {
-                    el.classList.remove('selected-day-number');
-                });
+    const hour = document.getElementById("hour").value;
+    const minute = document.getElementById("minute").value;
+    const interval = document.getElementById("interval").value;
 
-                const dayNumberEl = info.dayEl.querySelector('.fc-daygrid-day-number');
-                if (dayNumberEl) {
-                    dayNumberEl.classList.add('selected-day-number');
-                }
+    // ✅ Get selected vehicle
+    const vehicleInput = document.querySelector('input[name="vehicle"]:checked');
+    if (!vehicleInput) {
+      alert("Please select a vehicle type.");
+      return;
+    }
 
-                selectedDate = info.dateStr; // yyyy-mm-dd format
-            }
-        });
-    </script>
-    <script>
-        document.getElementById("filter-form").addEventListener("submit", function (e) {
-            e.preventDefault(); // Stop normal form submission
+    const vehicleMap = {
+      "car": "Car",
+      "taxi": "Taxi",
+      "bus": "Buses",
+      "motorcycle": "Motorcycles",
+      "single-truck": "Single Unit Trucks",
+      "multi-truck": "Multi Unit Trucks"
+    };
 
-            if (!selectedDate) {
-                alert("Please select a date on the calendar.");
-                return;
-            }
+    const vehicleKey = vehicleInput.value;
+    const vehicle = vehicleMap[vehicleKey];
 
-            const hour = document.getElementById("hour").value;
-            const minute = document.getElementById("minute").value;
-            const interval = document.getElementById("interval").value;
+    const datetimeStart = `${selectedDate} ${hour}:${minute}:00`;
+    const url = `/filter?datetime_start=${encodeURIComponent(datetimeStart)}&interval=${encodeURIComponent(interval)}&vehicle=${encodeURIComponent(vehicle)}`;
 
-            const datetimeStart = `${selectedDate} ${hour}:${minute}:00`;
-            const url = `/filter?datetime_start=${encodeURIComponent(datetimeStart)}&interval=${encodeURIComponent(interval)}`;
-            fetch(url, {
-                method: "GET",  // or "POST" if you're submitting data
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            })
-                .then(response => response.json())  // Parse the JSON response
-                .then(data => {
-                    // Handle the response data here
-                    console.log(data);
-                })
-                .catch(error => {
-                    console.error("Error:", error);
-                });
+    console.log("Fetching URL:", url);
 
-    </script>
+    fetch(url, {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log("Response:", data);
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
+  });
+});
+</script>
 
 </body>
 
