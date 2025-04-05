@@ -368,6 +368,11 @@
             const calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 selectable: true,
+                headerToolbar: {
+                    start: '',          // left side
+                    center: 'title',    // center
+                    end: 'prev,next'    // right side (no "today")
+                },
                 dateClick: function (info) {
                     document.querySelectorAll('.fc-daygrid-day-number').forEach(el => {
                         el.classList.remove('selected-day-number');
@@ -381,6 +386,8 @@
                     selectedDate = info.dateStr;
                 }
             });
+
+
 
             calendar.render();
 
