@@ -316,8 +316,14 @@ def realtime_series():
             curr["total_vehicles"] = round(curr["total_vehicles"], 2)
             curr["total_revenue"] = round(curr["total_revenue"], 2)
             for vclass in curr["by_class"]:
-                curr["by_class"][vclass]["vehicles"] = round(curr["by_class"][vclass]["vehicles"], 2)
-                curr["by_class"][vclass]["revenue"] = round(curr["by_class"][vclass]["revenue"], 2)
+                curr_class_vehicles_round = round(curr["by_class"][vclass]["vehicles"], 2)
+                curr_class_rev_round = round(curr["by_class"][vclass]["revenue"], 2)
+                if (curr_class_vehicles_round > 0):
+                    curr_class_vehicles_round = max(curr_class_vehicles_round, 1)
+                if (curr_class_rev_round > 0):
+                    curr_class_rev_round = max(curr_class_rev_round, 1)
+                curr["by_class"][vclass]["vehicles"] = curr_class_vehicles_round
+                curr["by_class"][vclass]["revenue"] = curr_class_rev_round
 
         frames.append(frame_data)
 
