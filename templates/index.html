@@ -1,359 +1,290 @@
 <!doctype html>
 <html>
-
-<head>
+  <head>
+    <!-- FullCalendar CSS -->
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet" />
-
     <!-- FullCalendar JS -->
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+
     <meta charset="utf-8">
     <title>Zoomable Manhattan Map with Custom Icons and Car Animation</title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
+      /* Basic resets */
+      body {
+        margin: 0;
+        padding: 0;
+      }
 
-        #map {
-            height: 100vh;
-            width: 100%;
-        }
+      /* Folium map container */
+      #map {
+        height: 100vh;
+        width: 100%;
+      }
 
-        .circular-marker {
-            border: 2px solid white;
-            border-radius: 50%;
-            box-sizing: border-box;
-        }
+      /* Circular icons for location markers */
+      .circular-marker {
+        border: 2px solid white;
+        border-radius: 50%;
+        box-sizing: border-box;
+      }
 
-        /* White box in top-right */
-        .slider-box {
-            opacity: 70%;
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: white;
-            padding: 16px;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            /* ensures it floats above map */
-            margin-right: 60px;
-        }
+      /* White box in top-right for calendar/time UI */
+      .slider-box {
+        opacity: 70%;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background-color: white;
+        padding: 16px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 1000; /* ensures it floats above map */
+        margin-right: 60px;
+      }
+      .slider-box label {
+        font-size: 14px;
+        margin-bottom: 4px;
+        display: block;
+      }
+      .slider-box input[type="range"] {
+        width: 100%;
+      }
 
-        .slider-box label {
-            font-size: 14px;
-            margin-bottom: 4px;
-            display: block;
-        }
+      /* FullCalendar toolbar spacing */
+      .fc .fc-toolbar-title {
+        margin-right: 20px;
+      }
 
-        .slider-box input[type="range"] {
-            width: 100%;
-        }
+      /* Interval and time row styling */
+      .interval-time-row {
+        display: flex;
+        gap: 20px; /* space between interval and time selectors */
+        margin-top: 12px;
+        align-items: flex;
+      }
+      .interval-wrapper,
+      .time-wrapper {
+        display: flex;
+        flex-direction: column;
+      }
 
-        .fc .fc-toolbar-title {
-            margin-right: 20px;
-        }
+      /* Transparent highlight for "today" in FullCalendar */
+      .fc .fc-daygrid-day.fc-day-today {
+        background-color: transparent !important;
+      }
 
-        .interval-time-row {
-            display: flex;
-            gap: 20px;
-            /* space between interval and time selectors */
-            margin-top: 12px;
-            align-items: flex;
-            /* align labels at the top */
-        }
+      /* Label for interval */
+      #interval-label {
+        display: block;
+        margin-top: 12px;
+        margin-bottom: 6px;
+        font-weight: 600;
+        font-size: 14px;
+        color: #333;
+      }
 
-        .interval-wrapper,
-        .time-wrapper {
-            display: flex;
-            flex-direction: column;
-        }
+      /* Styled dropdown for interval */
+      #interval {
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23666'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 14px;
+      }
+      #interval:hover,
+      #interval:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+        outline: none;
+      }
+      #interval option {
+        padding: 10px;
+        font-size: 14px;
+      }
 
-        .fc .fc-daygrid-day.fc-day-today {
-            background-color: transparent !important;
-        }
+      /* Highlight the selected day in the calendar */
+      .selected-day-number {
+        background-color: #003366; /* Dark blue */
+        color: white !important;
+        border-radius: 50%;
+        padding: 6px 10px;
+        display: inline-block;
+        line-height: 1;
+        font-weight: bold;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+      .selected-day-number:hover {
+        transform: scale(1.1);
+      }
 
-
-
-        #interval-label {
-            display: block;
-            margin-top: 12px;
-            margin-bottom: 6px;
-            font-weight: 600;
-            font-size: 14px;
-            color: #333;
-        }
-
-        /* Style the dropdown */
-        #interval {
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            background-color: #fff;
-            font-size: 14px;
-            font-weight: 500;
-            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23666'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            background-size: 14px;
-        }
-
-
-
-        /* Style when hovered or focused */
-        #interval:hover,
-        #interval:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
-            outline: none;
-        }
-
-        /* Improve dropdown options */
-        #interval option {
-            padding: 10px;
-            font-size: 14px;
-        }
-
-        .selected-day-number {
-            background-color: #003366;
-            /* Dark blue */
-            color: white !important;
-            border-radius: 50%;
-            padding: 6px 10px;
-            display: inline-block;
-            line-height: 1;
-            font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .selected-day-number:hover {
-            transform: scale(1.1);
-        }
-
-        .time-selector {
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            background-color: #fff;
-            font-size: 14px;
-            font-weight: 500;
-            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-            cursor: pointer;
-            appearance: none;
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            background-size: 14px;
-        }
+      /* Time selector styling */
+      .time-selector {
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        cursor: pointer;
+        appearance: none;
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 14px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-    <!-- Insert the Folium map HTML -->
+  <body>
+    <!-- Folium map is inserted here -->
     {{ map_html | safe }}
 
+    <!-- Calendar/time interval UI box -->
     <div class="slider-box">
-        <form id="filter-form">
-            <div id="calendar"></div>
-            <div class="interval-time-row">
-
-                <!-- Time Selector (left) -->
-                <div class="time-wrapper">
-                    <label for="hour">Select time:</label>
-                    <div class="time-selectors">
-                        <select id="hour" name="hour" class="time-selector">
-                            {% for h in range(24) %}
-                            <option value="{{ " %02d"|format(h) }}">{{ "%02d"|format(h) }}</option>
-                            {% endfor %}
-                        </select>
-                        :
-                        <select id="minute" name="minute" class="time-selector">
-                            <option value="00">00</option>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
-                            <option value="40">40</option>
-                            <option value="50">50</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Interval Selector (right) -->
-                <div class="interval-wrapper">
-                    <label for="interval">Select interval:</label>
-                    <select id="interval" name="interval">
-                        <option value="10min">10 min</option>
-                        <option value="30min">30 min</option>
-                        <option value="1hr">1 hour</option>
-                        <option value="3hr">3 hr</option>
-                        <option value="6hr">6 hr</option>
-                        <option value="1day">1 day</option>
-                        <option value="1week">1 week</option>
-                        <option value="2week">2 week</option>
-                        <option value="1month">1 month</option>
-                        <option value="3months">3 months</option>
-                    </select>
-                </div>
-                <button type="submit"
-                    style="margin-top: 12px; padding: 0px 15px; font-size: 14px; border-radius: 6px; background-color: #0a4f98; color: white; border: none; cursor: pointer;">
-                    Submit
-                </button>
+      <form action="/submit-date" method="post">
+        <div id="calendar"></div>
+        <div class="interval-time-row">
+          <!-- Time Selector (left) -->
+          <div class="time-wrapper">
+            <label for="hour">Select time:</label>
+            <div class="time-selectors">
+              <select id="hour" name="hour" class="time-selector">
+                {% for h in range(24) %}
+                <option value="{{ "%02d"|format(h) }}">{{ "%02d"|format(h) }}</option>
+                {% endfor %}
+              </select>
+              :
+              <select id="minute" name="minute" class="time-selector">
+                <option value="00">00</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+                <option value="50">50</option>
+              </select>
             </div>
+          </div>
 
+          <!-- Interval Selector (right) -->
+          <div class="interval-wrapper">
+            <label for="interval">Select interval:</label>
+            <select id="interval" name="interval">
+              <option value="10min">10 min</option>
+              <option value="30min">30 min</option>
+              <option value="1hr">1 hour</option>
+              <option value="3hr">3 hr</option>
+              <option value="6hr">6 hr</option>
+              <option value="1day">1 day</option>
+              <option value="1week">1 week</option>
+              <option value="2week">2 week</option>
+              <option value="1month">1 month</option>
+              <option value="3months">3 months</option>
+            </select>
+          </div>
 
-        </form>
+          <button type="submit"
+            style="margin-top: 12px; padding: 0px 15px; font-size: 14px; border-radius: 6px; background-color: #0a4f98; color: white; border: none; cursor: pointer;">
+            Submit
+          </button>
+        </div>
+      </form>
     </div>
 
-
-    <!-- Include the Leaflet.MovingMarker plugin -->
+    <!-- Leaflet Moving/Rotated Marker plugins -->
     <script src="https://cdn.jsdelivr.net/gh/ewoken/Leaflet.MovingMarker/MovingMarker.js"></script>
-    <!-- Include the Leaflet RotatedMarker plugin -->
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-rotatedmarker/0.2.0/leaflet.rotatedMarker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-rotatedmarker/0.2.0/leaflet.rotatedMarker.min.js"></script>
 
     <script>
-        // Wait until the DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', function () {
-            // Retrieve dynamic variables passed from Python
-            var map_instance = window["{{ map_name }}"];
-            var markerData = {{ marker_data_json | safe
-        }};
-        var carRoutes = {{ car_routes_json | safe }};
+      document.addEventListener('DOMContentLoaded', function () {
+        // 1) Grab data from Python
+        var map_instance = window["{{ map_name }}"];
+        var markerData = {{ marker_data_json | safe }};
+
+        // carRoutes might be passed from Python if you want to spawn multiple routes automatically
+        // console.log("Car Routes:", carRoutes); // if defined
+
         console.log("Marker Data:", markerData);
-        console.log("Car Routes:", carRoutes);
 
-        // Create location markers with circular icons and fly-to click events
+        // 2) Create location markers with circular icons
         for (var i = 0; i < markerData.length; i++) {
-            var data = markerData[i];
-            var customIcon = L.icon({
-                iconUrl: data.img_url,
-                iconSize: [50, 50],
-                className: 'circular-marker'
+          var data = markerData[i];
+          var customIcon = L.icon({
+            iconUrl: data.img_url,
+            iconSize: [50, 50],
+            className: 'circular-marker'
+          });
+          var marker = L.marker([data.lat, data.lon], { icon: customIcon }).addTo(map_instance);
+          marker.bindPopup(data.name);
+          marker.on('click', function (e) {
+            map_instance.flyTo(e.latlng, 16, {
+              animate: true,
+              duration: 1.5,
+              easeLinearity: 0.25
             });
-            var marker = L.marker([data.lat, data.lon], {
-                icon: customIcon,
-                rotationAngle: 45, // Example rotation for markers
-                rotationOrigin: 'center center'
-            }).addTo(map_instance);
-            marker.bindPopup(data.name);
-            marker.on('click', function (e) {
-                map_instance.flyTo(e.latlng, 16, {
-                    animate: true,
-                    duration: 1.5,
-                    easeLinearity: 0.25
-                });
-            });
+          });
         }
 
-        // Function to create a moving car marker between two points with a given icon URL and rotation
-        function addCar(start, end, duration, rotation, iconUrl) {
-            var carRoute = [start, end];
-            console.log("Adding car marker with route:", carRoute, "duration:", duration, "rotation:", rotation, "iconUrl:", iconUrl);
-            var carMarker = L.Marker.movingMarker(
-                carRoute,
-                [duration, duration],
-                {
-                    autostart: true,
-                    loop: true,
-                    icon: L.icon({
-                        iconUrl: iconUrl,
-                        iconSize: [40, 40]
-                    })
-                }
-            );
-            carMarker.addTo(map_instance);
-            // Set rotation angle on the marker
-            carMarker.setRotationAngle(rotation);
-            return carMarker;
+        // 3) Define addCar with no loop and remove marker at 'end'
+        function addCar(start, end, duration, iconUrl) {
+          var carRoute = [start, end];
+          console.log("Spawning car:", carRoute, "duration:", duration, "iconUrl:", iconUrl);
+          var carMarker = L.Marker.movingMarker(
+            carRoute,
+            [duration, duration],
+            {
+              autostart: true,
+              loop: false, /* do not loop the route */
+              icon: L.icon({
+                iconUrl: iconUrl,
+                iconSize: [40, 40]
+              })
+            }
+          );
+          carMarker.addTo(map_instance);
+          // remove car marker once it finishes
+          carMarker.on('end', function() {
+            map_instance.removeLayer(carMarker);
+          });
+          return carMarker;
         }
 
-        // Loop through each car route provided by Python and add a car marker
-        for (var i = 0; i < carRoutes.length; i++) {
-            var route = carRoutes[i];
-            addCar(route.start, route.end, route.duration, route.rotation, route.icon_url);
-        }
+        // 4) If you want to spawn cars from a Python snippet, do so here
+        // Example: if you pass selected_car_js from Python
+        {{ selected_car_js | safe }}
       });
     </script>
 
+    <!-- FullCalendar + logic for highlighting the day in the calendar -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var calendarEl = document.getElementById('calendar');
-
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                selectable: true,
-                dateClick: function (info) {
-                    // Remove highlight from all previously selected cells
-                    document.querySelectorAll('.fc-daygrid-day-number').forEach(el => {
-                        el.classList.remove('selected-day-number');
-                    });
-
-                    // Add class to the clicked date number
-                    const dayNumberEl = info.dayEl.querySelector('.fc-daygrid-day-number');
-                    if (dayNumberEl) {
-                        dayNumberEl.classList.add('selected-day-number');
-                    }
-                }
-
-
-            });
-
-            calendar.render();
-        });
-
-        let selectedDate = null;
+      document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+        if (!calendarEl) return;
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            selectable: true,
-            dateClick: function (info) {
-                document.querySelectorAll('.fc-daygrid-day-number').forEach(el => {
-                    el.classList.remove('selected-day-number');
-                });
-
-                const dayNumberEl = info.dayEl.querySelector('.fc-daygrid-day-number');
-                if (dayNumberEl) {
-                    dayNumberEl.classList.add('selected-day-number');
-                }
-
-                selectedDate = info.dateStr; // yyyy-mm-dd format
+          initialView: 'dayGridMonth',
+          selectable: true,
+          dateClick: function (info) {
+            // Remove highlight from all previously selected cells
+            document.querySelectorAll('.fc-daygrid-day-number').forEach(el => {
+              el.classList.remove('selected-day-number');
+            });
+            // Add class to the clicked date number
+            const dayNumberEl = info.dayEl.querySelector('.fc-daygrid-day-number');
+            if (dayNumberEl) {
+              dayNumberEl.classList.add('selected-day-number');
             }
+          }
         });
+        calendar.render();
+      });
     </script>
-    <script>
-        document.getElementById("filter-form").addEventListener("submit", function (e) {
-            e.preventDefault(); // Stop normal form submission
-
-            if (!selectedDate) {
-                alert("Please select a date on the calendar.");
-                return;
-            }
-
-            const hour = document.getElementById("hour").value;
-            const minute = document.getElementById("minute").value;
-            const interval = document.getElementById("interval").value;
-
-            const datetimeStart = `${selectedDate} ${hour}:${minute}:00`;
-            const url = `/filter?datetime_start=${encodeURIComponent(datetimeStart)}&interval=${encodeURIComponent(interval)}`;
-            fetch(url, {
-                method: "GET",  // or "POST" if you're submitting data
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            })
-                .then(response => response.json())  // Parse the JSON response
-                .then(data => {
-                    // Handle the response data here
-                    console.log(data);
-                })
-                .catch(error => {
-                    console.error("Error:", error);
-                });
-
-    </script>
-
-</body>
-
+  </body>
 </html>
