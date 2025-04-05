@@ -840,13 +840,18 @@ def index():
     # Render
     map_name = m.get_name()
     map_html = m.get_root().render()
+    
+    min_data = []
+    with open("min_timestamps.json", "r") as f:
+        min_data = json.load(f)
     return render_template(
         'index.html',
         map_html=map_html,
         map_name=map_name,
         marker_data_json=marker_data_json,
         selected_car_js=selected_car_js,
-        summary_data=summary_data
+        summary_data=summary_data,
+        min_data=min_data
     )
 
 if __name__ == '__main__':

@@ -13,6 +13,30 @@
     <meta charset="utf-8">
     <title>Zoomable Manhattan Map with Custom Icons and Car Animation</title>
     <style>
+        .panel-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 20px;
+}
+
+.panel {
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.panel h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.panel p {
+    font-size: 1rem;
+    margin: 5px 0;
+}
         /* Basic resets */
         body {
             margin: 0;
@@ -325,11 +349,51 @@
         <span id="timestep-value">0</span> ms
     </div>
 
+    <div class="panel-container" id="panel-container">
+        <!-- Panels will be dynamically inserted here -->
+    </div>
+
     <!-- Leaflet Moving/Rotated Marker plugins -->
     <script src="https://cdn.jsdelivr.net/gh/ewoken/Leaflet.MovingMarker/MovingMarker.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-rotatedmarker/0.2.0/leaflet.rotatedMarker.min.js"></script>
 
     <script>
+        const minData = {{ min_data | tojson }};  
+        // console.log(minData);
+        function createPanel(locationData) {
+            const panel = document.createElement('div');
+            panel.classList.add('panel');
+
+            // Create a title for the panel
+            const title = document.createElement('h2');
+            title.innerText = locationData.location;
+            panel.appendChild(title);
+
+            // Create a timestamp and vehicles display
+            const timestampElement = document.createElement('p');
+            timestampElement.innerText = `Timestamp: ${locationData.min_timestamp}`;
+            panel.appendChild(timestampElement);
+
+            const vehiclesElement = document.createElement('p');
+            vehiclesElement.innerText = `Min Total Vehicles: ${locationData.min_total_vehicles}`;
+            panel.appendChild(vehiclesElement);
+
+            // Append the panel to the panel container
+            document.getElementById('panel-container').appendChild(panel);
+        }
+
+        // Iterate through the minData and create panels
+        minData.forEach(data => {
+            const location = Object.keys(data.locations)[0]; // Get the location name (e.g., "Brooklyn Bridge")
+            const locationData = data.locations[location]; // Get the location's data
+
+            createPanel({
+                location: location,
+                min_timestamp: locationData.min_timestamp,
+                min_total_vehicles: locationData.min_total_vehicles
+            });
+        });
+
         document.addEventListener('DOMContentLoaded', function () {
             // 1) Grab data from Python
             var map_instance = window["{{ map_name }}"];
