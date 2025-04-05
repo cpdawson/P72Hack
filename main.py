@@ -137,6 +137,7 @@ INTERVAL_CONFIG = {
 def realtime_series():
     interval_key = request.args.get("interval", "1hr")
     start_str = request.args.get("datetime_start")
+    vehicle_class = request.args.get("vehicle_class", "Car")
 
     if not start_str or interval_key not in INTERVAL_CONFIG:
         return jsonify({"error": "Missing or invalid datetime_start or interval"}), 400
@@ -152,6 +153,10 @@ def realtime_series():
     block_duration = timedelta(minutes=10)
     interval_duration = block_duration * num_blocks
     end_time = start_time + interval_duration
+
+    if start_time < MIN_DATE or end_time > MAX_DATE:
+        return predict_with_ml_model(start_time, end_time, vehicle_class)
+
 
     # Query 10-minute blocks in range
     rows = db.session.query(
