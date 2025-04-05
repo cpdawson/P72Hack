@@ -1,299 +1,27 @@
-from flask import Flask, render_template, url_for, request, jsonify
+from flask import Flask, render_template, url_for
 import folium
 import json
 import os
 import math
-from datetime import datetime, timedelta
-from collections import defaultdict
-
-from sqlalchemy import func
 from folium.plugins import Fullscreen
 from views import views_bp
-from models import db, TrafficEntry
 
-########################################################################
-# 1) FLASK APP + DB CONFIG
-########################################################################
 app = Flask(__name__)
 app.register_blueprint(views_bp)
 
-DB_PATH = 'instance/traffic.db'
-app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_PATH}'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db.init_app(app)
+###############################################################
+# 1) Hardcode which vehicle class to show, e.g. "Car" or "Taxi"
+###############################################################
+SELECTED_CLASS = "Car"  # e.g. "Car", "Taxi", "Buses", etc.
 
-# Pricing dictionary from your second file
-PRICING = {
-    ('Car', 0): 2.25,
-    ('Car', 1): 9,
-    ('Buses', 0): 3.6,
-    ('Buses', 1): 14.4,
-    ('Motorcycles', 0): 1.05,
-    ('Motorcycles', 1): 4.5,
-    ('Taxi', 0): 0.75,
-    ('Taxi', 1): 0.75,
-    ('Single Unit Trucks', 0): 3.6,
-    ('Single Unit Trucks', 1): 14.4,
-    ('Multi Unit Trucks', 0): 5.40,
-    ('Multi Unit Trucks', 1): 21.60
-}
-
-# Hardcode which vehicle class to show from info.json
-SELECTED_CLASS = "Car"  # "Taxi", "Buses", etc.
-
-########################################################################
-# 2) Database load from CSV (if needed)
-########################################################################
-def load_data_from_csv(filepath):
-    import csv
-    with open(filepath, newline='', encoding='utf-8') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            entry = TrafficEntry(
-                id=int(row['Index']),
-                datetime=row['Datetime'],
-                is_peak=row['Is Peak'],
-                vehicle_class=row['Vehicle Class'],
-                detection_group=row['Detection Group'],
-                crz_entries=int(row['CRZ Entries']),
-                excluded_roadway_entries=int(row['Excluded Roadway Entries'])
-            )
-            db.session.add(entry)
-        db.session.commit()
-        print("CSV data loaded into database.")
-
-########################################################################
-# 3) Database routes from second file
-########################################################################
-@app.route('/data', methods=['GET'])
-def get_traffic_data():
-    entries = TrafficEntry.query.limit(12).all()
-    return jsonify([{
-        'id': e.id,
-        'datetime': e.datetime,
-        'is_peak': e.is_peak,
-        'vehicle_class': e.vehicle_class,
-        'detection_group': e.detection_group,
-        'crz_entries': e.crz_entries,
-        'excluded_roadway_entries': e.excluded_roadway_entries
-    } for e in entries])
-
-@app.route('/filter', methods=['GET'])
-def get_filtered_data():
-    datetime_start = request.args.get('datetime_start')
-    datetime_end = request.args.get('datetime_end')
-    detection_group = request.args.get('detection_group')
-    vehicle_class_filter = request.args.get('vehicle_class')
-
-    if not datetime_start or not datetime_end:
-        return jsonify({'error': 'datetime_start and datetime_end are required'}), 400
-
-    query = db.session.query(
-        TrafficEntry.vehicle_class,
-        TrafficEntry.is_peak,
-        func.sum(TrafficEntry.crz_entries)
-    ).filter(
-        TrafficEntry.datetime >= datetime_start,
-        TrafficEntry.datetime < datetime_end
-    )
-
-    if detection_group:
-        query = query.filter(TrafficEntry.detection_group == detection_group)
-
-    if vehicle_class_filter:
-        query = query.filter(TrafficEntry.vehicle_class == vehicle_class_filter)
-
-    query = query.group_by(TrafficEntry.vehicle_class, TrafficEntry.is_peak)
-    results = query.all()
-
-    vehicle_counts = {}
-    revenue_per_class = {}
-    total_vehicles = 0
-    total_revenue = 0
-
-    for vehicle_class, is_peak, entry_sum in results:
-        price_per = PRICING.get((vehicle_class, is_peak), 0)
-        revenue = entry_sum * price_per
-
-        vehicle_counts[vehicle_class] = vehicle_counts.get(vehicle_class, 0) + entry_sum
-        revenue_per_class[vehicle_class] = revenue_per_class.get(vehicle_class, 0) + revenue
-        total_vehicles += entry_sum
-        total_revenue += revenue
-
-    return jsonify({
-        "vehicle_counts": vehicle_counts,
-        "total_vehicles": total_vehicles,
-        "revenue_per_class": revenue_per_class,
-        "total_revenue": total_revenue
-    })
-
-# intervals for /realtime_series
-INTERVAL_CONFIG = {
-    "10min":   {"blocks": 1, "duration": 3},
-    "30min":   {"blocks": 3, "duration": 6},
-    "1hr":     {"blocks": 6, "duration": 12},
-    "3hr":     {"blocks": 18, "duration": 18},
-    "6hr":     {"blocks": 36, "duration": 18},
-    "1day":    {"blocks": 144, "duration": 20},
-    "1week":   {"blocks": 1008, "duration": 30},
-    "2week":   {"blocks": 2016, "duration": 60},
-    "1month":  {"blocks": 4320, "duration": 120},
-    "3month":  {"blocks": 12960, "duration": 180},
-}
-
-@app.route('/realtime_series', methods=['GET'])
-def realtime_series():
-    # from second file's logic
-    interval_key = request.args.get("interval", "1hr")
-    start_str = request.args.get("datetime_start")
-
-    if not start_str or interval_key not in INTERVAL_CONFIG:
-        return jsonify({"error": "Missing or invalid datetime_start or interval"}), 400
-
-    try:
-        start_time = datetime.strptime(start_str, "%Y-%m-%d %H:%M:%S")
-    except ValueError:
-        return jsonify({"error": "datetime_start must be in format YYYY-MM-DD HH:MM:SS"}), 400
-
-    config = INTERVAL_CONFIG[interval_key]
-    num_blocks = config["blocks"]
-    num_frames = config["duration"]
-    block_duration = timedelta(minutes=10)
-    interval_duration = block_duration * num_blocks
-    end_time = start_time + interval_duration
-
-    rows = db.session.query(
-        TrafficEntry.vehicle_class,
-        TrafficEntry.is_peak,
-        TrafficEntry.datetime,
-        TrafficEntry.detection_group,
-        func.sum(TrafficEntry.crz_entries).label("vehicle_count")
-    ).filter(
-        TrafficEntry.datetime >= start_time.strftime("%Y-%m-%d %H:%M:%S"),
-        TrafficEntry.datetime < end_time.strftime("%Y-%m-%d %H:%M:%S")
-    ).group_by(
-        TrafficEntry.vehicle_class,
-        TrafficEntry.is_peak,
-        TrafficEntry.datetime,
-        TrafficEntry.detection_group
-    ).all()
-
-    from collections import defaultdict
-    block_map = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: {"vehicles": 0, "revenue": 0})))
-    all_block_times = set()
-
-    for vclass, is_peak, dt, location, count in rows:
-        key = (vclass, is_peak)
-        price = PRICING.get(key, 0)
-        block_map[dt][location][vclass]["vehicles"] += count
-        block_map[dt][location][vclass]["revenue"] += count * price
-        all_block_times.add(dt)
-
-    all_block_times = sorted(all_block_times)
-    blocks_per_frame = num_blocks / num_frames
-    frames = []
-
-    cumulative = defaultdict(lambda: defaultdict(lambda: {"vehicles": 0, "revenue": 0}))
-    cumulative_total = defaultdict(lambda: {"vehicles": 0, "revenue": 0})
-
-    for i in range(num_frames):
-        frame_duration = interval_duration.total_seconds() / num_frames
-        frame_start = start_time + timedelta(seconds=(i * frame_duration))
-        frame_data = {
-            "timestamp": frame_start.strftime("%Y-%m-%d %H:%M:%S"),
-            "scale": 1,
-            "locations": {}
-        }
-
-        block_index = int(i * blocks_per_frame)
-        if block_index < len(all_block_times):
-            block_time = all_block_times[block_index]
-            # fraction:
-            portion = blocks_per_frame
-            frame_fraction = min(1.0, portion)
-
-            for location, classes in block_map[block_time].items():
-                if location not in frame_data["locations"]:
-                    frame_data["locations"][location] = {
-                        "current": {
-                            "total_vehicles": 0,
-                            "total_revenue": 0,
-                            "by_class": {}
-                        }
-                    }
-
-                for vclass, data in classes.items():
-                    vcount = data["vehicles"] * frame_fraction
-                    vrevenue = data["revenue"] * frame_fraction
-
-                    frame_data["locations"][location]["current"]["total_vehicles"] += vcount
-                    frame_data["locations"][location]["current"]["total_revenue"] += vrevenue
-
-                    if vclass not in frame_data["locations"][location]["current"]["by_class"]:
-                        frame_data["locations"][location]["current"]["by_class"][vclass] = {"vehicles": 0, "revenue": 0}
-                    frame_data["locations"][location]["current"]["by_class"][vclass]["vehicles"] += vcount
-                    frame_data["locations"][location]["current"]["by_class"][vclass]["revenue"] += vrevenue
-
-                    cumulative[location][vclass]["vehicles"] += vcount
-                    cumulative[location][vclass]["revenue"] += vrevenue
-                    cumulative_total[location]["vehicles"] += vcount
-                    cumulative_total[location]["revenue"] += vrevenue
-
-        # finalize rounding
-        for location in frame_data["locations"]:
-            # build cumulative by class
-            cumulative_by_class = {}
-            for vclass in cumulative[location]:
-                cumulative_by_class[vclass] = {
-                    "vehicles": round(cumulative[location][vclass]["vehicles"], 2),
-                    "revenue": round(cumulative[location][vclass]["revenue"], 2)
-                }
-
-            ctot_veh = round(cumulative_total[location]["vehicles"], 2)
-            ctot_rev = round(cumulative_total[location]["revenue"], 2)
-
-            frame_data["locations"][location]["cumulative"] = {
-                "vehicles": ctot_veh,
-                "revenue": ctot_rev,
-                "by_class": cumulative_by_class
-            }
-
-            # round current
-            curr = frame_data["locations"][location]["current"]
-            curr["total_vehicles"] = round(curr["total_vehicles"], 2)
-            curr["total_revenue"] = round(curr["total_revenue"], 2)
-            for vclass in curr["by_class"]:
-                bc = curr["by_class"][vclass]
-                bc["vehicles"] = round(bc["vehicles"], 2)
-                bc["revenue"] = round(bc["revenue"], 2)
-
-        frames.append(frame_data)
-
-    return jsonify(frames)
-
-########################################################################
-# 4) A /save_timestep route to append data to info.json
-########################################################################
-@app.route('/save_timestep', methods=['POST'])
-def save_timestep():
-    try:
-        data = request.get_json()
-        with open('info.json', 'r') as f:
-            existing_data = json.load(f)
-        existing_data.append(data)
-        with open('info.json', 'w') as f:
-            json.dump(existing_data, f, indent=4)
-        return jsonify({"message": "Data saved successfully"}), 200
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-########################################################################
-# 5) The "Car Routes" approach from the first file
-########################################################################
+#####################################
+# 2) Define route definitions
+#    but route icons depend on SELECTED_CLASS.
+#####################################
 def get_car_routes():
     """
-    Hard-coded route definitions.
-    We use SELECTED_CLASS to pick the icon.
+    Each route uses the SELECTED_CLASS to pick its icon filename.
+    Make sure you actually have, e.g. car_icon_135.png, taxi_icon_135.png, etc.
     """
     class_lower = SELECTED_CLASS.lower()
     return [
@@ -383,22 +111,19 @@ def get_car_routes():
         }
     ]
 
-########################################################################
-# 6) parse_info_json for "by_class" with SELECTED_CLASS
-########################################################################
+def get_route_for_location(loc_name):
+    for r in get_car_routes():
+        if r["name"] == loc_name:
+            return r
+    return None
+
+#########################################################
+# 3) Parse JSON but only keep the selected vehicle class
+#########################################################
 def parse_info_json(json_path="info.json"):
     """
-    We'll read each time step's 'by_class' for 'current'. We only keep SELECTED_CLASS vehicles.
-    Example structure in JSON:
-      "FDR Drive at 60th St": {
-         "current": {
-           "by_class": {
-              "Car": {"vehicles": 182.0, ...},
-              "Taxi": {"vehicles": 83.5, ...}
-           }
-         }
-      }
-    We spawn only the chosen SELECTED_CLASS from each location/time step if > 0.
+    We'll read each time step's 'by_class', but only keep SELECTED_CLASS vehicles.
+    e.g. "Car" => read by_class["Car"]["vehicles"] -> spawn that many
     """
     with open(json_path, "r") as f:
         data = json.load(f)
@@ -406,29 +131,30 @@ def parse_info_json(json_path="info.json"):
     results = []
     for i, time_step in enumerate(data):
         step_info = {"index": i, "vehicles": []}
-        location_dict = time_step.get("locations", {})
+        locations = time_step.get("locations", {})
 
-        for loc_name, loc_data in location_dict.items():
+        for loc_name, loc_data in locations.items():
             by_class = loc_data["current"].get("by_class", {})
+            # If the selected class is in by_class for that location:
             if SELECTED_CLASS in by_class:
-                vehicles_float = by_class[SELECTED_CLASS].get("vehicles", 0)
+                vehicles_float = by_class[SELECTED_CLASS]["vehicles"]
                 vehicle_count = int(math.floor(vehicles_float))  # or round
                 if vehicle_count > 0:
                     step_info["vehicles"].append({
                         "location": loc_name,
                         "count": vehicle_count
                     })
-
         results.append(step_info)
     return results
 
-########################################################################
-# 7) build_spawn_js_from_timestepdata: final for the merged file
-########################################################################
-def build_spawn_js_from_timestepdata(timestep_data, speed=2000, spawn_window=5000, step_delay=2000):
+###############################################################
+# 4) Build JS spawns, ignoring other classes
+###############################################################
+def build_spawn_js_from_timestepdata(timestep_data, speed=2000, spawn_window=20000, step_delay=2000):
     """
-    Similar to the second file's approach, but now we only spawn the SELECTED_CLASS vehicles
-    from parse_info_json. The total time for each step is spawn_window + step_delay.
+    We'll spawn only SELECTED_CLASS vehicles (already filtered in parse_info_json).
+    Each step spawns them over 'spawn_window' ms,
+    then we wait 'step_delay' before the next step.
     """
     lines = []
     total_step_time = spawn_window + step_delay
@@ -436,14 +162,19 @@ def build_spawn_js_from_timestepdata(timestep_data, speed=2000, spawn_window=500
     for step_info in timestep_data:
         step_index = step_info["index"]
         offset_for_step = step_index * total_step_time
-        for item in step_info["vehicles"]:
+        vehicles_list = step_info["vehicles"]  # each item: { "location", "count" }
+
+        for item in vehicles_list:
             loc_name = item["location"]
             count = item["count"]
             route = get_route_for_location(loc_name)
             if not route or count <= 0:
                 continue
 
-            # Icon is from route["icon_url"] based on SELECTED_CLASS
+            # route["icon_url"] was built from SELECTED_CLASS, so let's just use that
+            icon_path = route["icon_url"]
+
+            # Spread out spawns in spawn_window
             if count > 1:
                 delay_per_car = float(spawn_window) / (count - 1)
             else:
@@ -456,26 +187,35 @@ def build_spawn_js_from_timestepdata(timestep_data, speed=2000, spawn_window=500
                     f"addCar([{route['start'][0]}, {route['start'][1]}], "
                     f"[{route['end'][0]}, {route['end'][1]}], "
                     f"{speed}, "
-                    f"'{route['icon_url']}'); "
+                    f"'{icon_path}'); "
                     f"}}, {spawn_time});"
                 )
                 lines.append(line)
 
     return "\n".join(lines)
 
+###############################################################
+# 5) get_image_url for static location markers
+###############################################################
+def get_image_url(name):
+    folder = "entry_images"
+    file_path = os.path.join(app.static_folder, folder, f"{name}.jpg")
+    if os.path.exists(file_path):
+        return url_for('static', filename=f"{folder}/{name}.jpg")
+    return url_for('static', filename="images/location.png")
 
-########################################################################
-# 8) The main index route that uses parse_info_json + build_spawn_js
-########################################################################
+###############################################################
+# 6) Flask route
+###############################################################
 @app.route('/')
 def index():
-    # 1) Create the base map
+    # Create the base map
     manhattan_coords = [40.7831, -73.9712]
     m = folium.Map(location=manhattan_coords, zoom_start=13, tiles='CartoDB positron')
     Fullscreen(position='topright').add_to(m)
     folium.LayerControl().add_to(m)
 
-    # 2) Build the location marker data for static icons
+    # Location marker data
     location_coords = {
         "Brooklyn Bridge": [40.7061, -73.9969],
         "West Side Highway at 60th St": [40.7713, -73.9902],
@@ -500,18 +240,18 @@ def index():
         })
     marker_data_json = json.dumps(marker_data)
 
-    # 3) Parse info.json for the selected vehicle class
+    # Parse the JSON to get only SELECTED_CLASS
     all_timestep_data = parse_info_json("info.json")
 
-    # 4) Build the JS snippet to spawn them slowly
+    # Build the JS snippet
     selected_car_js = build_spawn_js_from_timestepdata(
-        all_timestep_data,
+        timestep_data=all_timestep_data,
         speed=4000,
-        spawn_window=20000,  # 20 seconds to spawn each step
-        step_delay=2000      # +2 seconds after each step
+        spawn_window=20000,
+        step_delay=2000
     )
 
-    # 5) Render
+    # Render
     map_name = m.get_name()
     map_html = m.get_root().render()
     return render_template(
@@ -522,18 +262,5 @@ def index():
         selected_car_js=selected_car_js
     )
 
-
-########################################################################
-# 9) Boot logic
-########################################################################
 if __name__ == '__main__':
-    with app.app_context():
-        # If the DB doesn't exist, create and load from CSV
-        if not os.path.exists(DB_PATH):
-            print("Database not found. Creating and loading data...")
-            db.create_all()
-            load_data_from_csv('cleaned_data.csv')
-        else:
-            print("Database exists. Skipping CSV import.")
-
     app.run(debug=True)
