@@ -20,84 +20,84 @@ def get_car_routes():
             "start": [40.766708, -74.018524],
             "end": [40.760159, -74.002774],
             "duration": 4000,
-            "icon_url": url_for('static', filename='vehicles/car_icon.png')
+            "icon_url": url_for('static', filename='vehicles/car_icon_135.png')
         },
         {
             "name": "Brooklyn Bridge",
             "start": [40.702210, -73.992004],
             "end": [40.708034, -73.999334],
             "duration": 4000,
-            "icon_url": url_for('static', filename='vehicles/car_flipped_75.png')
+            "icon_url": url_for('static', filename='vehicles/car_icon_315.png')
         },
         {
             "name": "Williamsburg Bridge",
             "start": [40.712044, -73.966979],
             "end": [40.714744, -73.976249],
             "duration": 4000,
-            "icon_url": url_for('static', filename='vehicles/car_flipped_75.png')
+            "icon_url": url_for('static', filename='vehicles/car_icon_315.png')
         },
         {
             "name": "Manhattan Bridge",
             "start": [40.702299, -73.987915],
             "end": [40.709581, -73.991853],
             "duration": 4000,
-            "icon_url": url_for('static', filename='vehicles/car_flipped_75.png')
+            "icon_url": url_for('static', filename='vehicles/car_icon_315.png')
         },
         {
             "name": "Holland Tunnel",
             "start": [40.728897, -74.031589],
             "end": [40.726183, -74.011329],
             "duration": 4000,
-            "icon_url": url_for('static', filename='vehicles/car_icon.png')
+            "icon_url": url_for('static', filename='vehicles/car_icon_180.png')
         },
         {
             "name": "Hugh L. Carey Tunnel",
             "start": [40.685010, -74.007056],
             "end": [40.700987, -74.015532],
             "duration": 4000,
-            "icon_url": url_for('static', filename='vehicles/car_flipped_75.png')
+            "icon_url": url_for('static', filename='vehicles/car_icon_315.png')
         },
         {
             "name": "Queensboro Bridge",
             "start": [40.754783, -73.949994],
             "end": [40.758882, -73.959143],
             "duration": 4000,
-            "icon_url": url_for('static', filename='vehicles/car_flipped_rotated.png')
+            "icon_url": url_for('static', filename='vehicles/car_icon_0.png')
         },
         {
             "name": "Queens Midtown",
             "start": [40.74289229922877, -73.96082715665342],
             "end": [40.747834966345074, -73.96816127996215],
             "duration": 4000,
-            "icon_url": url_for('static', filename='vehicles/car_flipped_rotated.png')
+            "icon_url": url_for('static', filename='vehicles/car_icon_0.png')
         },
         {
             "name": "West 60th",
             "start": [40.77164541992876, -73.98306418072985],
             "end": [40.768193524649575, -73.98565628724995],
             "duration": 4000,
-            "icon_url": url_for('static', filename='vehicles/car_flipped.png')
+            "icon_url": url_for('static', filename='vehicles/car_icon_0.png')
         },
         {
             "name": "11th Ave and 60th",
             "start": [40.77326978935373, -73.98933771562456],
             "end": [40.768173333383125, -73.99302066958496],
             "duration": 4000,
-            "icon_url": url_for('static', filename='vehicles/car_flipped.png')
+            "icon_url": url_for('static', filename='vehicles/car_icon_0.png')
         },
         {
             "name": "East 60th",
             "start": [40.76328718520095, -73.96243948478009],
             "end": [40.75937598422883, -73.96541471379228],
             "duration": 4000,
-            "icon_url": url_for('static', filename='vehicles/car_flipped.png')
+            "icon_url": url_for('static', filename='vehicles/car_icon_0.png')
         },
         {
             "name": "60th and 1st",
             "start": [40.76444641664966, -73.95843436877433],
             "end": [40.76103366817469, -73.96405583512909],
             "duration": 4000,
-            "icon_url": url_for('static', filename='vehicles/car_flipped.png')
+            "icon_url": url_for('static', filename='vehicles/car_icon_0.png')
         }
     ]
 
