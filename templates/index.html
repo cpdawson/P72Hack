@@ -71,6 +71,20 @@
             align-items: flex;
         }
 
+        #timestep-box {
+    opacity: 70%;
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    background-color: white;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    margin-right: 60px;
+    font-size: 16px; /* Adjust font size */
+}
+
         .interval-wrapper,
         .time-wrapper {
             display: flex;
@@ -308,6 +322,11 @@
 </div>
 
         <!-- END ADDED -->
+    </div>
+
+    <div id="timestep-box" >
+        <strong>Current Timestep:</strong> 
+        <span id="timestep-value">0</span> ms
     </div>
 
     <!-- Leaflet Moving/Rotated Marker plugins -->
