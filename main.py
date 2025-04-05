@@ -3,7 +3,7 @@ import folium
 import json
 import requests
 from sqlalchemy import func
-import csv 
+import csv
 from datetime import datetime, timedelta
 from collections import defaultdict
 import os
@@ -64,6 +64,26 @@ def get_traffic_data():
         'excluded_roadway_entries': e.excluded_roadway_entries
     } for e in entries])
 
+
+@app.route("/get_updated_spawns", methods=["GET"])
+def get_updated_spawns():
+    # Re-parse info.json so we see the updated data
+    # Then build the same JS lines that spawn cars.
+    # For example, if you already have parse_info_json() and build_spawn_js_from_timestepdata() used by index():
+
+    # re-parse the info.json
+    all_timestep_data = parse_info_json("info.json")  # only SELECTED_CLASS vehicles
+    # build new JavaScript lines
+    spawn_js = build_spawn_js_from_timestepdata(
+        timestep_data=all_timestep_data,
+        speed=4000,
+        spawn_window=20000,
+        step_delay=2000
+    )
+
+    # Return it as JSON:
+    return jsonify({"spawn_js": spawn_js})
+
 @app.route('/filter', methods=['GET'])
 def get_filtered_data():
     datetime_start = request.args.get('datetime_start')
@@ -116,6 +136,51 @@ def get_filtered_data():
         "revenue_per_class": revenue_per_class,
         "total_revenue": total_revenue
     })
+
+SUMMARY_FILE = "summary_stats.json"
+
+def read_summary_stats():
+    """Load summary_stats.json and return as dict. If file doesn't exist, return {}."""
+    if not os.path.exists(SUMMARY_FILE):
+        return {}
+    with open(SUMMARY_FILE, "r") as f:
+        return json.load(f)
+
+def write_summary_stats(stats_dict):
+    """Overwrite summary_stats.json with stats_dict."""
+    with open(SUMMARY_FILE, "w") as f:
+        json.dump(stats_dict, f, indent=2)
+
+def compute_summary_for_info(json_path="info.json"):
+    """
+    Example: parse the final frame of info.json
+    and sum up vehicles/revenue by class.
+    """
+    if not os.path.exists(json_path):
+        return {}
+
+    with open(json_path, "r") as f:
+        data = json.load(f)
+
+    if not data:
+        return {}
+
+    # Let's pick the final frame
+    final_frame = data[-1]  # or data[0], whichever is correct
+    locations = final_frame.get("locations", {})
+    totals_by_class = {}
+
+    for loc_name, loc_info in locations.items():
+        by_class = loc_info["cumulative"]["by_class"]
+        for vclass, stats in by_class.items():
+            vehicles = stats.get("vehicles", 0)
+            revenue = stats.get("revenue", 0)
+            if vclass not in totals_by_class:
+                totals_by_class[vclass] = {"vehicles": 0, "revenue": 0.0}
+            totals_by_class[vclass]["vehicles"] += vehicles
+            totals_by_class[vclass]["revenue"] += revenue
+
+    return totals_by_class
 
 
 
@@ -195,7 +260,7 @@ def realtime_series():
             "scale": 1,
             "locations": {}
         }
-        
+
         # Always pull the block the frame overlaps with
         block_index = int(i * blocks_per_frame)
 
@@ -400,30 +465,27 @@ def get_route_for_location(loc_name):
             return r
     return None
 
-@app.route('/save_timestep', methods=['POST'])
+
+@app.route("/save_timestep", methods=["POST"])
 def save_timestep():
-    try:
-        data = request.get_json()
-        
+    data = request.get_json()
 
-        if not data:
-            return jsonify({"error": "No data received"}), 400
+    # 1) Write frames_data to info.json
+    frames_data = data.get("frames_data", [])
+    with open("info.json", "w") as f:
+        json.dump(frames_data, f, indent=2)
 
-        # Path to the JSON file
-        filepath = 'info.json'
+    chosen_vehicle = data.get("chosen_vehicle", "Car")
+    global SELECTED_CLASS
+    SELECTED_CLASS = chosen_vehicle
 
-        # Append the new data
-        # existing_data.append(data)
+    # 2) Now that info.json is updated, compute new summary
+    new_summary = compute_summary_for_info("info.json")
 
-        # Save back to the file
-        with open(filepath, 'w') as f:
-            json.dump(data, f, indent=2)
+    # 3) Save that summary to summary_stats.json
+    write_summary_stats(new_summary)
 
-        return jsonify({"status": "success", "message": "Data saved"}), 200
-
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
+    return jsonify({"status": "success", "message": "Data saved"}), 200
 
 
 def build_spawn_js_from_timestepdata(timestep_data, speed=2000, spawn_window=5000, step_delay=2000):
@@ -680,6 +742,14 @@ def get_image_url(name):
 
 @app.route('/')
 def index():
+    # 1) read summary
+    summary_data = read_summary_stats()
+
+    # 2) Create the Folium map, parse info.json, build spawns, etc.
+    manhattan_coords = [40.7831, -73.9712]
+    m = folium.Map(location=manhattan_coords, zoom_start=13, tiles='CartoDB positron')
+    # ... add markers, etc.
+
     # 1) Create your base map
     manhattan_coords = [40.7831, -73.9712]
     m = folium.Map(location=manhattan_coords, zoom_start=13, tiles='CartoDB positron')
@@ -730,9 +800,10 @@ def index():
         map_html=map_html,
         map_name=map_name,
         marker_data_json=marker_data_json,
-        selected_car_js=selected_car_js
+        selected_car_js=selected_car_js,
+        summary_data=summary_data
     )
-    
+
 if __name__ == '__main__':
     with app.app_context():
         if not os.path.exists(DB_PATH):
@@ -742,3 +813,4 @@ if __name__ == '__main__':
         else:
             print("Database exists. Skipping CSV import.")
     app.run(debug=True)
+

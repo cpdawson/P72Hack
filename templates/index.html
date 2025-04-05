@@ -7,7 +7,6 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-
     <!-- FullCalendar JS -->
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
 
@@ -211,7 +210,6 @@
     <!-- Folium map is inserted here -->
     {{ map_html | safe }}
 
-
     <!-- Calendar/time interval UI box -->
     <div class="slider-box">
         <form id="filter-form">
@@ -256,7 +254,7 @@
                 </div>
             </div>
 
-            <!-- ✅ NEW ROW FOR ICONS AND SUBMIT BUTTON -->
+            <!-- Icons + Submit -->
             <div class="icon-submit-row">
                 <div class="vehicle-selector">
                     <label class="icon-radio">
@@ -290,72 +288,86 @@
                 </button>
             </div>
         </form>
+
+        <!-- ADDED: summary-output to show total vehicles/revenue -->
+        <div id="summary-output" style="margin-top: 20px; font-size: 14px;">
+    <h4>Vehicle Totals (From summary_stats.json)</h4>
+    <ul>
+    {% if summary_data %}
+      {% for vclass, stats in summary_data.items() %}
+        <li>
+          <strong>{{ vclass }}</strong>:
+          ${{ stats.revenue|round(2, 'floor') }} from
+          {{ stats.vehicles|round(0, 'floor') }} vehicles
+        </li>
+      {% endfor %}
+    {% else %}
+      <li>No summary data available.</li>
+    {% endif %}
+    </ul>
+</div>
+
+        <!-- END ADDED -->
     </div>
 
     <!-- Leaflet Moving/Rotated Marker plugins -->
     <script src="https://cdn.jsdelivr.net/gh/ewoken/Leaflet.MovingMarker/MovingMarker.js"></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-rotatedmarker/0.2.0/leaflet.rotatedMarker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-rotatedmarker/0.2.0/leaflet.rotatedMarker.min.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // 1) Grab data from Python
             var map_instance = window["{{ map_name }}"];
-            var markerData = {{ marker_data_json | safe
-        }};
+            var markerData = {{ marker_data_json | safe }};
 
-        // carRoutes might be passed from Python if you want to spawn multiple routes automatically
-        // console.log("Car Routes:", carRoutes); // if defined
+            console.log("Marker Data:", markerData);
 
-        console.log("Marker Data:", markerData);
-
-        // 2) Create location markers with circular icons
-        for (var i = 0; i < markerData.length; i++) {
-            var data = markerData[i];
-            var customIcon = L.icon({
-                iconUrl: data.img_url,
-                iconSize: [50, 50],
-                className: 'circular-marker'
-            });
-            var marker = L.marker([data.lat, data.lon], { icon: customIcon }).addTo(map_instance);
-            marker.bindPopup(data.name);
-            marker.on('click', function (e) {
-                map_instance.flyTo(e.latlng, 16, {
-                    animate: true,
-                    duration: 1.5,
-                    easeLinearity: 0.25
+            // 2) Create location markers with circular icons
+            for (var i = 0; i < markerData.length; i++) {
+                var data = markerData[i];
+                var customIcon = L.icon({
+                    iconUrl: data.img_url,
+                    iconSize: [50, 50],
+                    className: 'circular-marker'
                 });
-            });
-        }
+                var marker = L.marker([data.lat, data.lon], { icon: customIcon }).addTo(map_instance);
+                marker.bindPopup(data.name);
+                marker.on('click', function (e) {
+                    map_instance.flyTo(e.latlng, 16, {
+                        animate: true,
+                        duration: 1.5,
+                        easeLinearity: 0.25
+                    });
+                });
+            }
 
-        // 3) Define addCar with no loop and remove marker at 'end'
-        function addCar(start, end, duration, iconUrl) {
-            var carRoute = [start, end];
-            console.log("Spawning car:", carRoute, "duration:", duration, "iconUrl:", iconUrl);
-            var carMarker = L.Marker.movingMarker(
-                carRoute,
-                [duration, duration],
-                {
-                    autostart: true,
-                    loop: false, /* do not loop the route */
-                    icon: L.icon({
-                        iconUrl: iconUrl,
-                        iconSize: [40, 40]
-                    })
-                }
-            );
-            carMarker.addTo(map_instance);
-            // remove car marker once it finishes
-            carMarker.on('end', function () {
-                map_instance.removeLayer(carMarker);
-            });
-            return carMarker;
-        }
+            // 3) Define addCar with no loop and remove marker at 'end'
+            function addCar(start, end, duration, iconUrl) {
+                var carRoute = [start, end];
+                console.log("Spawning car:", carRoute, "duration:", duration, "iconUrl:", iconUrl);
+                var carMarker = L.Marker.movingMarker(
+                    carRoute,
+                    [duration, duration],
+                    {
+                        autostart: true,
+                        loop: false, // do not loop the route
+                        icon: L.icon({
+                            iconUrl: iconUrl,
+                            iconSize: [40, 40]
+                        })
+                    }
+                );
+                carMarker.addTo(map_instance);
+                // remove car marker once it finishes
+                carMarker.on('end', function () {
+                    map_instance.removeLayer(carMarker);
+                });
+                return carMarker;
+            }
 
-        // 4) If you want to spawn cars from a Python snippet, do so here
-        // Example: if you pass selected_car_js from Python
-        { { selected_car_js | safe } }
-      });
+            // 4) Insert Python snippet for spawning cars
+            {{ selected_car_js | safe }}
+        });
     </script>
 
 
@@ -371,27 +383,25 @@
                 headerToolbar: {
                     start: '',          // left side
                     center: 'title',    // center
-                    end: 'prev,next'    // right side (no "today")
+                    end: 'prev,next'    // right side
                 },
                 dateClick: function (info) {
+                    // Clear any previously selected day highlight
                     document.querySelectorAll('.fc-daygrid-day-number').forEach(el => {
                         el.classList.remove('selected-day-number');
                     });
-
+                    // Highlight newly clicked day
                     const dayNumberEl = info.dayEl.querySelector('.fc-daygrid-day-number');
                     if (dayNumberEl) {
                         dayNumberEl.classList.add('selected-day-number');
                     }
-
                     selectedDate = info.dateStr;
                 }
             });
 
-
-
             calendar.render();
 
-            // ✅ Submit logic with vehicle type mapping
+            // Submit logic with vehicle type
             document.getElementById("filter-form").addEventListener("submit", function (e) {
                 e.preventDefault();
 
@@ -404,7 +414,7 @@
                 const minute = document.getElementById("minute").value;
                 const interval = document.getElementById("interval").value;
 
-                // ✅ Get selected vehicle
+                // Get selected vehicle
                 const vehicleInput = document.querySelector('input[name="vehicle"]:checked');
                 if (!vehicleInput) {
                     alert("Please select a vehicle type.");
@@ -419,56 +429,90 @@
                     "single-truck": "Single Unit Trucks",
                     "multi-truck": "Multi Unit Trucks"
                 };
-
                 const vehicleKey = vehicleInput.value;
                 const vehicle = vehicleMap[vehicleKey];
 
                 const datetimeStart = `${selectedDate} ${hour}:${minute}:00`;
                 const datetimeEnd = new Date(datetimeStart);
-                datetimeEnd.setHours(datetimeEnd.getHours() + parseInt(interval)); // Adjust end time based on interval
-                // const url = `/filter?datetime_start=${encodeURIComponent(datetimeStart)}&interval=${encodeURIComponent(interval)}&vehicle=${encodeURIComponent(vehicle)}`;
+                datetimeEnd.setHours(datetimeEnd.getHours() + parseInt(interval)); // just an example
+
+                // Endpoint that returns frames
                 const url = `/realtime_series?datetime_start=${encodeURIComponent(datetimeStart)}&interval=${encodeURIComponent(interval)}`;
-
-                time_data = {}
-
 
                 fetch(url, {
                     method: "GET",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' }
                 })
-                    .then(response => response.json())
-                    .then(data => {
-                        time_data = data
-                        console.log("Data saved:", time_data);
-                        console.log("about to fetch");
-                        fetch("/save_timestep", {
-                            method: "POST",
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(data)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("API data:", data);
+
+                    // --- ADDED: Summaries (cumulative revenue & vehicles) ---
+                    if (!data.length) {
+                        // Edge case: data might be empty
+                        document.getElementById("summary-output").textContent = "No data returned for this timeframe.";
+                        return;
+                    }
+
+                    // We look at data[0].locations for cumulative values
+                    // or loop over every frame. Adjust if needed.
+                    const locations = data[0].locations;
+                    const cumulativeSums = {};
+
+                    for (const locName in locations) {
+                        const byClass = locations[locName].cumulative.by_class;
+                        for (const vehicleType in byClass) {
+                            const { revenue, vehicles } = byClass[vehicleType];
+
+                            if (!cumulativeSums[vehicleType]) {
+                                cumulativeSums[vehicleType] = { revenue: 0, vehicles: 0 };
+                            }
+                            cumulativeSums[vehicleType].revenue += revenue;
+                            cumulativeSums[vehicleType].vehicles += vehicles;
+                        }
+                    }
+
+                    // Display results in #summary-output
+                    const summaryOutput = document.getElementById("summary-output");
+                    summaryOutput.innerHTML =
+                        "<h4>Vehicle Totals (Cumulative)</h4><ul>" +
+                        Object.entries(cumulativeSums)
+                            .map(([type, { revenue, vehicles }]) =>
+                                `<li><strong>${type}</strong>: $${revenue.toFixed(2)} from ${vehicles.toFixed(2)} vehicles</li>`)
+                            .join("") +
+                        "</ul>";
+                    // --- END ADDED: Summaries ---
+
+                    // Next: POST the entire frames + chosen vehicle to /save_timestep
+                    return fetch("/save_timestep", {
+                        method: "POST",
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            frames_data: data,
+                            chosen_vehicle: vehicle
                         })
-                            .then(response => response.json())
-                            .then(data => {
-                                console.log("Data saved at save_timestep:", data);
-                            })
-                            .catch(error => {
-                                console.error("Error:", error);
-                            });
-                    })
-                    .catch(error => {
-                        console.error("Error:", error);
                     });
+                })
+                .then(response => {
+                    // If there's no second .then, you might have data or JSON
+                    if (response && response.json) {
+                        return response.json();
+                    }
+                })
+                .then(saveResp => {
+                    // If we got a JSON from /save_timestep, log it
+                    if (saveResp) {
+                        console.log("save_timestep response:", saveResp);
+                    }
+                    // Optionally reload to trigger new spawns
+                    {window.location.reload(true);}
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
             });
         });
-
-        // console.log("Fetching URL:", url);
-
-
     </script>
 
 </body>
-
 </html>
