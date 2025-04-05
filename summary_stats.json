@@ -1,1 +1,26 @@
-{}
+{
+  "Buses": {
+    "vehicles": 20,
+    "revenue": 72.0
+  },
+  "Car": {
+    "vehicles": 677,
+    "revenue": 1523.25
+  },
+  "Motorcycles": {
+    "vehicles": 8,
+    "revenue": 8.4
+  },
+  "Multi Unit Trucks": {
+    "vehicles": 10,
+    "revenue": 54.0
+  },
+  "Single Unit Trucks": {
+    "vehicles": 52,
+    "revenue": 187.2
+  },
+  "Taxi": {
+    "vehicles": 859,
+    "revenue": 644.25
+  }
+}

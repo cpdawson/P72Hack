@@ -666,7 +666,7 @@ def parse_info_json(json_path="info.json"):
 
     results = []
     for i, time_step in enumerate(data):
-        step_info = {"index": i, "vehicles": []}
+        step_info = {"index": i, "vehicles": [],"timestep": time_step["timestamp"]}
         locations = time_step.get("locations", {})
 
         for loc_name, loc_data in locations.items():
@@ -724,11 +724,13 @@ def build_spawn_js_from_timestepdata(timestep_data, speed=2000, spawn_window=200
                     f"[{route['end'][0]}, {route['end'][1]}], "
                     f"{speed}, "
                     f"'{icon_path}'); "
-                    f"updateTimestep({spawn_time}); "
-
+                    f"updateTimestep('{step_info['timestep']}');"
                     f"}}, {spawn_time});"
                 )
                 lines.append(line)
+                # lines.append(f"updateTimestep('{step_info['timestep']}');")
+                
+                # lines.append(f"updateTimestep('2025-03-05 00:00:00');")
 
     return "\n".join(lines)
 
@@ -748,12 +750,7 @@ def index():
     summary_data = read_summary_stats()
 
     # 2) Create the Folium map, parse info.json, build spawns, etc.
-    manhattan_coords = [40.7831, -73.9712]
-    m = folium.Map(location=manhattan_coords, zoom_start=13, tiles='CartoDB positron')
-    # ... add markers, etc.
-
-    # 1) Create your base map
-    manhattan_coords = [40.7831, -73.9712]
+    manhattan_coords = [40.7381, -73.9712]
     m = folium.Map(location=manhattan_coords, zoom_start=13, tiles='CartoDB positron')
     Fullscreen(position='topright').add_to(m)
     folium.LayerControl().add_to(m)

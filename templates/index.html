@@ -260,10 +260,6 @@
                         <option value="3hr">3 hr</option>
                         <option value="6hr">6 hr</option>
                         <option value="1day">1 day</option>
-                        <option value="1week">1 week</option>
-                        <option value="2week">2 week</option>
-                        <option value="1month">1 month</option>
-                        <option value="3months">3 months</option>
                     </select>
                 </div>
             </div>
@@ -325,7 +321,7 @@
     </div>
 
     <div id="timestep-box" >
-        <strong>Current Timestep:</strong> 
+        <strong>Time:</strong> 
         <span id="timestep-value">0</span> ms
     </div>
 
@@ -363,7 +359,7 @@
             // 3) Define addCar with no loop and remove marker at 'end'
             function addCar(start, end, duration, iconUrl) {
                 var carRoute = [start, end];
-                console.log("Spawning car:", carRoute, "duration:", duration, "iconUrl:", iconUrl);
+                // console.log("Spawning car:", carRoute, "duration:", duration, "iconUrl:", iconUrl);
                 var carMarker = L.Marker.movingMarker(
                     carRoute,
                     [duration, duration],
@@ -389,7 +385,7 @@
         });
 
         function updateTimestep(timestamp) {
-            console.log(timestamp);
+            console.log("timestamp:" + timestamp);
             const timestepValue = document.getElementById("timestep-value");
             timestepValue.textContent = timestamp;
         }
