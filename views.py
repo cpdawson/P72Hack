@@ -22,6 +22,11 @@ def bridge():
         "Manhattan Bridge": [40.7075, -73.9903],
         "Hugh L. Carey Tunnel": [40.7003, -74.0132]
     }
+    
+    path = [
+        [40.7615, -74.0057],
+        [40.7589, -73.9993]
+    ]
     m = folium.Map(location=location_coords["Lincoln Tunnel"], zoom_start=18, tiles='CartoDB positron')
     map_name = m.get_name()
     
@@ -45,6 +50,22 @@ def bridge():
       </head>
       <body>
         {map_html}
+        <script> 
+            const path = {json.dumps(path)}; 
+            const map = {m.get_name()};
+            let market = L.marker(path[0]).addTo(map);
+            
+            let i = 1; 
+            function moveMarker() {{
+                if (i < path.length) {{
+                    marker.setLatLng(path[i]);
+                    i++;
+                    setTimeout(moveMarker, 1000);
+                }}
+            }}
+            
+            moveMarker();
+        </script>
       </body>
     </html>
     """

@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Zoomable Manhattan Map with Custom Icons and Car Animation</title>
+    <style>
+      body { margin: 0; padding: 0; }
+      #map { height: 100vh; width: 100%; }
+      .circular-marker {
+          border: 2px solid white;
+          border-radius: 50%;
+          box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Insert the Folium map HTML -->
+    {{ map_html | safe }}
+
+    <!-- Include the Leaflet.MovingMarker plugin -->
+    <script src="https://cdn.jsdelivr.net/gh/ewoken/Leaflet.MovingMarker/MovingMarker.js"></script>
+    <!-- Include the Leaflet RotatedMarker plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-rotatedmarker/0.2.0/leaflet.rotatedMarker.min.js"></script>
+
+    <script>
+      // Wait until the DOM is fully loaded
+      document.addEventListener('DOMContentLoaded', function() {
+          // Retrieve dynamic variables passed from Python
+          var map_instance = window["{{ map_name }}"];
+          var markerData = {{ marker_data_json | safe }};
+          var carRoutes = {{ car_routes_json | safe }};
+          console.log("Marker Data:", markerData);
+          console.log("Car Routes:", carRoutes);
+
+          // Create location markers with circular icons and fly-to click events
+          for (var i = 0; i < markerData.length; i++) {
+              var data = markerData[i];
+              var customIcon = L.icon({
+                  iconUrl: data.img_url,
+                  iconSize: [50, 50],
+                  className: 'circular-marker'
+              });
+              var marker = L.marker([data.lat, data.lon], {
+                  icon: customIcon,
+                  rotationAngle: 45, // Example rotation for markers
+                  rotationOrigin: 'center center'
+              }).addTo(map_instance);
+              marker.bindPopup(data.name);
+              marker.on('click', function(e) {
+                  map_instance.flyTo(e.latlng, 16, {
+                      animate: true,
+                      duration: 1.5,
+                      easeLinearity: 0.25
+                  });
+              });
+          }
+
+          // Function to create a moving car marker between two points with a given icon URL and rotation
+          function addCar(start, end, duration, rotation, iconUrl) {
+              var carRoute = [start, end];
+              console.log("Adding car marker with route:", carRoute, "duration:", duration, "rotation:", rotation, "iconUrl:", iconUrl);
+              var carMarker = L.Marker.movingMarker(
+                  carRoute,
+                  [duration, duration],
+                  {
+                      autostart: true,
+                      loop: true,
+                      icon: L.icon({
+                          iconUrl: iconUrl,
+                          iconSize: [40, 40]
+                      })
+                  }
+              );
+              carMarker.addTo(map_instance);
+              // Set rotation angle on the marker
+              carMarker.setRotationAngle(rotation);
+              return carMarker;
+          }
+
+          // Loop through each car route provided by Python and add a car marker
+          for (var i = 0; i < carRoutes.length; i++) {
+              var route = carRoutes[i];
+              addCar(route.start, route.end, route.duration, route.rotation, route.icon_url);
+          }
+      });
+    </script>
+  </body>
+</html>
