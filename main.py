@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for, request, jsonify
 import folium
 import json
+import requests
 from sqlalchemy import func
 import csv 
 from datetime import datetime, timedelta
@@ -408,23 +409,27 @@ def get_route_for_location(loc_name):
 @app.route('/save_timestep', methods=['POST'])
 def save_timestep():
     try:
-        # Get the JSON data from the request body
         data = request.get_json()
+        
 
-        # Open the info.json file and load the existing data
-        with open('info.json', 'r') as f:
-            existing_data = json.load(f)
+        if not data:
+            return jsonify({"error": "No data received"}), 400
 
-        # Append the new data to the existing data
-        existing_data.append(data)
+        # Path to the JSON file
+        filepath = 'info.json'
 
-        # Write the updated data back to info.json
-        with open('info.json', 'w') as f:
-            json.dump(existing_data, f, indent=4)
+        # Append the new data
+        # existing_data.append(data)
 
-        return jsonify({"message": "Data saved successfully"}), 200
+        # Save back to the file
+        with open(filepath, 'w') as f:
+            json.dump(data, f, indent=2)
+
+        return jsonify({"status": "success", "message": "Data saved"}), 200
+
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 
 def build_spawn_js_from_timestepdata(timestep_data, speed=2000, spawn_window=5000, step_delay=2000):
