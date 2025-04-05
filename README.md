@@ -1,0 +1,12 @@
+# 🚦 NYC Congestion Visualizer
+
+This project was built for a hackathon using real NYC congestion pricing data. The dataset contained detailed records of vehicle entries into Manhattan’s Congestion Relief Zone, including the type of vehicle, the specific entry location, and the timestamp of each entry. Our goal was to create a flexible and interactive map that could help users visualize traffic patterns and gain insights into when and how different vehicle types enter the city. The final product allows users to explore peak traffic hours, analyze congestion by entry point, and estimate revenue generated from congestion pricing.
+
+The project is a web interface where users can select a vehicle class—such as **car, taxi, motorcycle, single-unit truck, multi-unit truck, or bus**—as well as a start time and an interval (ranging from **10 minutes to a full day**). Once the user makes their selection and hits "Submit," the app fetches data for the requested time window from a backend Flask server. The server calculates the number of vehicles entering through each entry point and estimates the corresponding congestion pricing revenue based on whether it’s a peak or off-peak period.
+
+The data is then visualized using a custom animated map built with **Folium** and **Leaflet.js**. Each vehicle is animated along a route that mimics a real NYC entry point—like the **Lincoln Tunnel** or **Brooklyn Bridge**—with vehicle icons specific to the selected class. The animation is divided into time steps, allowing users to watch the flow of traffic evolve over the selected interval. A summary of total vehicle entries and revenue by vehicle type is also shown alongside the map for quick insights.
+
+On the **backend**, we built the application using **Flask**, and used **SQLAlchemy** to interact with an **SQLite** database that stores all traffic data. **JSON**, **CSV**, and Python’s **datetime** module were used for parsing and manipulating the raw dataset. On the **frontend**, we used **Folium** to embed an interactive Leaflet map in our HTML, and **FullCalendar** to enable intuitive date and time selection. **Font Awesome** icons were used to represent vehicle types in a clean, visually engaging way.
+
+The main Flask routes are in `main.py`, and the frontend lives in the `templates/` and `static/` folders, where we store our HTML, images, and vehicle icons. Supporting files like `info.json` and `summary_stats.json` store intermediate outputs used to render animations and generate statistics.
+
