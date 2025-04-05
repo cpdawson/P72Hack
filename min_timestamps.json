@@ -1,0 +1,98 @@
+[
+  {
+    "locations": {
+      "Brooklyn Bridge": {
+        "min_timestamp": "2025-03-04 00:00:00",
+        "min_total_vehicles": 40.67
+      }
+    }
+  },
+  {
+    "locations": {
+      "East 60th St": {
+        "min_timestamp": "2025-03-04 00:00:00",
+        "min_total_vehicles": 132.0
+      }
+    }
+  },
+  {
+    "locations": {
+      "FDR Drive at 60th St": {
+        "min_timestamp": "2025-03-04 00:00:00",
+        "min_total_vehicles": 49.67
+      }
+    }
+  },
+  {
+    "locations": {
+      "Holland Tunnel": {
+        "min_timestamp": "2025-03-04 00:00:00",
+        "min_total_vehicles": 30.67
+      }
+    }
+  },
+  {
+    "locations": {
+      "Hugh L. Carey Tunnel": {
+        "min_timestamp": "2025-03-04 00:00:00",
+        "min_total_vehicles": 2.67
+      }
+    }
+  },
+  {
+    "locations": {
+      "Lincoln Tunnel": {
+        "min_timestamp": "2025-03-04 00:00:00",
+        "min_total_vehicles": 39.33
+      }
+    }
+  },
+  {
+    "locations": {
+      "Manhattan Bridge": {
+        "min_timestamp": "2025-03-04 00:00:00",
+        "min_total_vehicles": 30.67
+      }
+    }
+  },
+  {
+    "locations": {
+      "Queens Midtown Tunnel": {
+        "min_timestamp": "2025-03-04 00:00:00",
+        "min_total_vehicles": 32.67
+      }
+    }
+  },
+  {
+    "locations": {
+      "Queensboro Bridge": {
+        "min_timestamp": "2025-03-04 00:00:00",
+        "min_total_vehicles": 31.33
+      }
+    }
+  },
+  {
+    "locations": {
+      "West 60th St": {
+        "min_timestamp": "2025-03-04 00:00:00",
+        "min_total_vehicles": 60.67
+      }
+    }
+  },
+  {
+    "locations": {
+      "West Side Highway at 60th St": {
+        "min_timestamp": "2025-03-04 00:00:00",
+        "min_total_vehicles": 36.33
+      }
+    }
+  },
+  {
+    "locations": {
+      "Williamsburg Bridge": {
+        "min_timestamp": "2025-03-04 00:00:00",
+        "min_total_vehicles": 55.33
+      }
+    }
+  }
+]

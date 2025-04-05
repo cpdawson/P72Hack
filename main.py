@@ -327,7 +327,47 @@ def realtime_series():
 
         frames.append(frame_data)
 
+    timestamps = find_min_vehicle_timestamp(frames)
+    with open("min_timestamps.json", "w") as f:
+        json.dump(timestamps, f, indent=2)
+
     return jsonify(frames)
+
+def find_min_vehicle_timestamp(frames):
+    # Initialize an empty list to store the results
+    min_vehicle_timestamps = []
+
+    # Iterate through each frame in the list of frames
+    for frame in frames:
+        # Iterate through each location in the frame's data
+        for location, data in frame['locations'].items():
+            # Check if this location has been processed already
+            location_found = False
+            for entry in min_vehicle_timestamps:
+                if entry["locations"].get(location):
+                    location_found = True
+                    break
+
+            # If the location hasn't been found yet, initialize it
+            if not location_found:
+                min_vehicle_timestamps.append({
+                    "locations": {location: {"min_timestamp": None, "min_total_vehicles": float("inf")}}
+                })
+
+            # Now find the minimum vehicles for this location and frame
+            location_data = frame["locations"][location]
+            total_vehicles = location_data["current"]["total_vehicles"]
+
+            # If the total vehicles for this location is smaller than the current minimum, update the minimum and timestamp
+            for entry in min_vehicle_timestamps:
+                if location in entry["locations"]:
+                    min_location = entry["locations"][location]
+                    if total_vehicles < min_location["min_total_vehicles"]:
+                        min_location["min_total_vehicles"] = total_vehicles
+                        min_location["min_timestamp"] = frame["timestamp"]
+
+    return min_vehicle_timestamps
+
 
 def get_car_routes():
     """
