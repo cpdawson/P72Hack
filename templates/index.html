@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <title>Traffic Dashboard</title>
   <style>
     body {
@@ -38,7 +40,8 @@
       max-width: 600px;
     }
 
-    select, input[type="datetime-local"] {
+    select,
+    input[type="datetime-local"] {
       padding: 10px;
       margin: 10px 0;
       border-radius: 6px;
@@ -91,7 +94,8 @@
       margin-top: 10px;
     }
 
-    th, td {
+    th,
+    td {
       text-align: left;
       padding: 8px;
       border-bottom: 1px solid #ccc;
@@ -102,6 +106,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <a href="/viewer" class="main-button">Launch Visualization</a>
@@ -156,7 +161,61 @@
         .then(response => response.json())
         .then(data => {
           const resultDiv = document.getElementById("results");
+
+          // Vehicle summary output (you can keep this unchanged)
           resultDiv.innerHTML = `
+    <div class="summary-cards">
+      <div class="card">
+        <strong>Total Vehicles:</strong><br>
+        ${data.total_vehicles.toLocaleString()}
+      </div>
+      <div class="card green">
+        <strong>Total Revenue:</strong><br>
+        $${data.total_revenue.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+      </div>
+    </div>
+  `;
+
+          // Prepare data for Sankey chart
+          const sankeyDataArray = [
+            ['From', 'To', 'Value']
+          ];
+          for (const [vehicleClass, count] of Object.entries(data.vehicle_counts)) {
+  sankeyDataArray.push(['Total Vehicles', vehicleClass, count]);
+}
+
+for (const [vehicleClass, revenue] of Object.entries(data.revenue_per_class)) {
+  sankeyDataArray.push(['Total Revenue', vehicleClass, revenue]);
+}
+
+          // Load Google Charts
+          google.charts.load('current', { packages: ['sankey'] });
+          google.charts.setOnLoadCallback(drawChart);
+
+          function drawChart() {
+            const chartData = google.visualization.arrayToDataTable(sankeyDataArray);
+
+            const options = {
+              width: '100%',
+              height: 500,
+              sankey: {
+                node: {
+                  label: { fontSize: 14 },
+                },
+                link: {
+                  colorMode: 'gradient',
+                  colors: ['#76a7fa', '#a2d4ab'],
+                }
+              }
+            };
+
+            const chart = new google.visualization.Sankey(document.getElementById('sankey_chart'));
+            chart.draw(chartData, options);
+          }
+
+
+          resultDiv.innerHTML = `
+            <div id="sankey_chart" style="width: 100%; height: 500px;"></div>
             <div class="summary-cards">
               <div class="card">
                 <strong>Total Vehicles:</strong><br>
@@ -195,6 +254,7 @@
                 </tbody>
               </table>
             </div>
+
           `;
         })
         .catch(error => {
@@ -204,4 +264,5 @@
     });
   </script>
 </body>
+
 </html>
