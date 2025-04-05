@@ -11,6 +11,9 @@ from models import db, TrafficEntry
 import math
 from folium.plugins import Fullscreen
 from views import views_bp
+import torch
+from model import TrafficLSTM
+from collections import defaultdict
 
 app = Flask(__name__)
 app.register_blueprint(views_bp)
@@ -50,6 +53,18 @@ def load_data_from_csv(filepath):
             db.session.add(entry)
         db.session.commit()
         print("CSV data loaded into database.")
+
+global_model = None
+global_model_loaded = False
+
+def load_traffic_model():
+    global global_model, global_model_loaded
+    if not global_model_loaded:
+        model = TrafficLSTM(input_dim=10, hidden_dim=32, output_dim=1)
+        model.load_state_dict(torch.load("traffic_model.pth"))
+        model.eval()
+        global_model = model
+        global_model_loaded = True
 
 @app.route('/data', methods=['GET'])
 def get_traffic_data():
@@ -198,19 +213,82 @@ INTERVAL_CONFIG = {
     "3month":  {"blocks": 12960, "duration": 180},
 }
 
-@app.route('/realtime_series', methods=['GET'])
-def realtime_series():
-    interval_key = request.args.get("interval", "1hr")
-    start_str = request.args.get("datetime_start")
 
-    if not start_str or interval_key not in INTERVAL_CONFIG:
-        return jsonify({"error": "Missing or invalid datetime_start or interval"}), 400
+def build_frames(rows, start_time, interval_duration, num_frames, num_blocks):
+    block_map = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: {"vehicles": 0, "revenue": 0})))
+    all_block_times = set()
 
-    try:
-        start_time = datetime.strptime(start_str, "%Y-%m-%d %H:%M:%S")
-    except ValueError:
-        return jsonify({"error": "datetime_start must be in format YYYY-MM-DD HH:MM:SS"}), 400
+    for vclass, is_peak, dt, location, count in rows:
+        price = PRICING.get((vclass, is_peak), 0)
+        block_map[dt][location][vclass]["vehicles"] += count
+        block_map[dt][location][vclass]["revenue"] += count * price
+        all_block_times.add(dt)
 
+    all_block_times = sorted(all_block_times)
+    blocks_per_frame = num_blocks / num_frames
+    frames = []
+    cumulative = defaultdict(lambda: defaultdict(lambda: {"vehicles": 0, "revenue": 0}))
+    cumulative_total = defaultdict(lambda: {"vehicles": 0, "revenue": 0})
+
+    for i in range(num_frames):
+        frame_duration = interval_duration.total_seconds() / num_frames
+        frame_start = start_time + timedelta(seconds=(i * frame_duration))
+        frame_data = {
+            "timestamp": frame_start.strftime("%Y-%m-%d %H:%M:%S"),
+            "scale": 1,
+            "locations": {}
+        }
+        block_index = int(i * blocks_per_frame)
+        if block_index < len(all_block_times):
+            block_time = all_block_times[block_index]
+            portion = blocks_per_frame
+            frame_fraction = portion
+            for location, classes in block_map[block_time].items():
+                if location not in frame_data["locations"]:
+                    frame_data["locations"][location] = {
+                        "current": {
+                            "total_vehicles": 0,
+                            "total_revenue": 0,
+                            "by_class": {}
+                        }
+                    }
+                for vclass, data in classes.items():
+                    vcount = data["vehicles"] * frame_fraction
+                    vrevenue = data["revenue"] * frame_fraction
+                    frame_data["locations"][location]["current"]["total_vehicles"] += vcount
+                    frame_data["locations"][location]["current"]["total_revenue"] += vrevenue
+                    if vclass not in frame_data["locations"][location]["current"]["by_class"]:
+                        frame_data["locations"][location]["current"]["by_class"][vclass] = {"vehicles": 0, "revenue": 0}
+                    frame_data["locations"][location]["current"]["by_class"][vclass]["vehicles"] += vcount
+                    frame_data["locations"][location]["current"]["by_class"][vclass]["revenue"] += vrevenue
+
+                    cumulative[location][vclass]["vehicles"] += vcount
+                    cumulative[location][vclass]["revenue"] += vrevenue
+                    cumulative_total[location]["vehicles"] += vcount
+                    cumulative_total[location]["revenue"] += vrevenue
+
+        for location in frame_data["locations"]:
+            cumulative_by_class = {
+                vclass: {
+                    "vehicles": round(cumulative[location][vclass]["vehicles"], 2),
+                    "revenue": round(cumulative[location][vclass]["revenue"], 2)
+                } for vclass in cumulative[location]
+            }
+            frame_data["locations"][location]["cumulative"] = {
+                "vehicles": round(cumulative_total[location]["vehicles"], 2),
+                "revenue": round(cumulative_total[location]["revenue"], 2),
+                "by_class": cumulative_by_class
+            }
+            curr = frame_data["locations"][location]["current"]
+            curr["total_vehicles"] = round(curr["total_vehicles"], 2)
+            curr["total_revenue"] = round(curr["total_revenue"], 2)
+            for vclass in curr["by_class"]:
+                curr["by_class"][vclass]["vehicles"] = round(curr["by_class"][vclass]["vehicles"], 2)
+                curr["by_class"][vclass]["revenue"] = round(curr["by_class"][vclass]["revenue"], 2)
+        frames.append(frame_data)
+    return frames
+
+def build_frames_from_db(start_time, interval_key):
     config = INTERVAL_CONFIG[interval_key]
     num_blocks = config["blocks"]
     num_frames = config["duration"]
@@ -218,7 +296,6 @@ def realtime_series():
     interval_duration = block_duration * num_blocks
     end_time = start_time + interval_duration
 
-    # Query 10-minute blocks in range
     rows = db.session.query(
         TrafficEntry.vehicle_class,
         TrafficEntry.is_peak,
@@ -235,91 +312,77 @@ def realtime_series():
         TrafficEntry.detection_group
     ).all()
 
-    block_map = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: {"vehicles": 0, "revenue": 0})))
-    all_block_times = set()
+    frames = build_frames(rows, start_time, interval_duration, num_frames, num_blocks)
+    return frames
 
-    for vclass, is_peak, dt, location, count in rows:
-        key = (vclass, is_peak)
-        price = PRICING.get(key, 0)
-        block_map[dt][location][vclass]["vehicles"] += count
-        block_map[dt][location][vclass]["revenue"] += count * price
-        all_block_times.add(dt)
+def build_frames_from_model(start_time, interval_key):
+    config = INTERVAL_CONFIG[interval_key]
+    num_blocks = config["blocks"]
+    num_frames = config["duration"]
+    block_duration = timedelta(minutes=10)
+    interval_duration = block_duration * num_blocks
+    end_time = start_time + interval_duration
 
-    all_block_times = sorted(all_block_times)
-    blocks_per_frame = num_blocks / num_frames
-    frames = []
+    # Define the list of locations (must match your markers)
+    location_names = [
+        "Brooklyn Bridge", "West Side Highway at 60th St", "West 60th St",
+        "Queensboro Bridge", "Queens Midtown Tunnel", "Lincoln Tunnel",
+        "Holland Tunnel", "FDR Drive at 60th St", "East 60th St",
+        "Williamsburg Bridge", "Manhattan Bridge", "Hugh L. Carey Tunnel"
+    ]
 
-    cumulative = defaultdict(lambda: defaultdict(lambda: {"vehicles": 0, "revenue": 0}))
-    cumulative_total = defaultdict(lambda: {"vehicles": 0, "revenue": 0})
+    # For demonstration, we forecast only for "Car" with is_peak=0.
+    vehicle_class = "Car"
+    is_peak = 0
 
-    for i in range(num_frames):
-        frame_duration = interval_duration.total_seconds() / num_frames
-        frame_start = start_time + timedelta(seconds=(i * frame_duration))
-        frame_data = {
-            "timestamp": frame_start.strftime("%Y-%m-%d %H:%M:%S"),
-            "scale": 1,
-            "locations": {}
-        }
+    all_rows = []
+    dt_cursor = start_time
+    while dt_cursor < end_time:
+        for loc in location_names:
+            predicted_count = call_model_for(global_model, dt_cursor, loc, vehicle_class, is_peak)
+            all_rows.append((vehicle_class, is_peak, dt_cursor, loc, predicted_count))
+        dt_cursor += block_duration
 
-        # Always pull the block the frame overlaps with
-        block_index = int(i * blocks_per_frame)
+    frames = build_frames(all_rows, start_time, interval_duration, num_frames, num_blocks)
+    return frames
 
-        if block_index < len(all_block_times):
-            block_time = all_block_times[block_index]
-            portion = blocks_per_frame  # portion of block assigned to each frame
-            frame_fraction = portion
+def call_model_for(model, time, location, vehicle_class, is_peak):
+    # Example feature encoding:
+    hour = time.hour / 23.0      # normalized 0-1
+    minute = time.minute / 59.0   # normalized 0-1
+    day_of_week = time.weekday() / 6.0  # normalized (0=Monday, 6=Sunday)
+    is_peak_norm = float(is_peak)
+    location_val = 0.5  # dummy value
+    vehicle_class_val = 0.5  # dummy value
+    features = [hour, minute, day_of_week, is_peak_norm, location_val, vehicle_class_val, 0, 0, 0, 0]
+    x = torch.tensor(features, dtype=torch.float32).unsqueeze(0).unsqueeze(0)  # shape: (1,1,10)
+    with torch.no_grad():
+        prediction = model(x)
+    # Multiply the prediction by a scaling factor (e.g., 100) so the output is on a larger scale.
+    count = prediction.item() * 100  
+    return max(0, count)  # ensure non-negative
 
-            for location, classes in block_map[block_time].items():
-                if location not in frame_data["locations"]:
-                    frame_data["locations"][location] = {
-                        "current": {
-                            "total_vehicles": 0,
-                            "total_revenue": 0,
-                            "by_class": {}
-                        }
-                    }
 
-                for vclass, data in classes.items():
-                    vcount = data["vehicles"] * frame_fraction
-                    vrevenue = data["revenue"] * frame_fraction
 
-                    frame_data["locations"][location]["current"]["total_vehicles"] += vcount
-                    frame_data["locations"][location]["current"]["total_revenue"] += vrevenue
+@app.route('/realtime_series', methods=['GET'])
+def realtime_series():
+    interval_key = request.args.get("interval", "1hr")
+    start_str = request.args.get("datetime_start")
 
-                    if vclass not in frame_data["locations"][location]["current"]["by_class"]:
-                        frame_data["locations"][location]["current"]["by_class"][vclass] = {"vehicles": 0, "revenue": 0}
-                    frame_data["locations"][location]["current"]["by_class"][vclass]["vehicles"] += vcount
-                    frame_data["locations"][location]["current"]["by_class"][vclass]["revenue"] += vrevenue
+    if not start_str or interval_key not in INTERVAL_CONFIG:
+        return jsonify({"error": "Missing or invalid datetime_start or interval"}), 400
 
-                    cumulative[location][vclass]["vehicles"] += vcount
-                    cumulative[location][vclass]["revenue"] += vrevenue
-                    cumulative_total[location]["vehicles"] += vcount
-                    cumulative_total[location]["revenue"] += vrevenue
+    try:
+        start_time = datetime.strptime(start_str, "%Y-%m-%d %H:%M:%S")
+    except ValueError:
+        return jsonify({"error": "datetime_start must be in format YYYY-MM-DD HH:MM:SS"}), 400
 
-        # Finalize cumulative and round values after updating all data
-        for location in frame_data["locations"]:
-            cumulative_by_class = {
-                vclass: {
-                    "vehicles": round(cumulative[location][vclass]["vehicles"], 2),
-                    "revenue": round(cumulative[location][vclass]["revenue"], 2)
-                } for vclass in cumulative[location]
-            }
-
-            frame_data["locations"][location]["cumulative"] = {
-                "vehicles": round(cumulative_total[location]["vehicles"], 2),
-                "revenue": round(cumulative_total[location]["revenue"], 2),
-                "by_class": cumulative_by_class
-            }
-
-            # Round current
-            curr = frame_data["locations"][location]["current"]
-            curr["total_vehicles"] = round(curr["total_vehicles"], 2)
-            curr["total_revenue"] = round(curr["total_revenue"], 2)
-            for vclass in curr["by_class"]:
-                curr["by_class"][vclass]["vehicles"] = round(curr["by_class"][vclass]["vehicles"], 2)
-                curr["by_class"][vclass]["revenue"] = round(curr["by_class"][vclass]["revenue"], 2)
-
-        frames.append(frame_data)
+    # Define the cutoff date (e.g. historical data is available up to March 29, 2025)
+    last_db_date = datetime(2025, 3, 29, 23, 59, 59)
+    if start_time <= last_db_date:
+        frames = build_frames_from_db(start_time, interval_key)
+    else:
+        frames = build_frames_from_model(start_time, interval_key)
 
     return jsonify(frames)
 
@@ -812,5 +875,9 @@ if __name__ == '__main__':
             load_data_from_csv('cleaned_data.csv')
         else:
             print("Database exists. Skipping CSV import.")
+        
+        # Load the PyTorch forecasting model
+        load_traffic_model()
+
     app.run(debug=True)
 
