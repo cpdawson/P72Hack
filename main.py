@@ -678,8 +678,13 @@ def get_image_url(name):
         return url_for('static', filename=f"{folder}/{name}.jpg")
     return url_for('static', filename="images/location.png")
 
-@app.route('/')
-def index():
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+
+@app.route('/viewer')
+def viewing():
     # 1) Create your base map
     manhattan_coords = [40.7831, -73.9712]
     m = folium.Map(location=manhattan_coords, zoom_start=13, tiles='CartoDB positron')
@@ -726,7 +731,7 @@ def index():
     map_name = m.get_name()
     map_html = m.get_root().render()
     return render_template(
-        'index.html',
+        'viewer.html',
         map_html=map_html,
         map_name=map_name,
         marker_data_json=marker_data_json,
