@@ -187,7 +187,8 @@ def realtime_series():
     cumulative_total = defaultdict(lambda: {"vehicles": 0, "revenue": 0})
 
     for i in range(num_frames):
-        frame_start = start_time + timedelta(seconds=i)
+        frame_duration = interval_duration.total_seconds() / num_frames
+        frame_start = start_time + timedelta(seconds=(i * frame_duration))
         frame_data = {
             "timestamp": frame_start.strftime("%Y-%m-%d %H:%M:%S"),
             "scale": 1,
@@ -403,6 +404,28 @@ def get_route_for_location(loc_name):
         if r["name"] == loc_name:
             return r
     return None
+
+@app.route('/save_timestep', methods=['POST'])
+def save_timestep():
+    try:
+        # Get the JSON data from the request body
+        data = request.get_json()
+
+        # Open the info.json file and load the existing data
+        with open('info.json', 'r') as f:
+            existing_data = json.load(f)
+
+        # Append the new data to the existing data
+        existing_data.append(data)
+
+        # Write the updated data back to info.json
+        with open('info.json', 'w') as f:
+            json.dump(existing_data, f, indent=4)
+
+        return jsonify({"message": "Data saved successfully"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 def build_spawn_js_from_timestepdata(timestep_data, speed=2000, spawn_window=5000, step_delay=2000):
     """
