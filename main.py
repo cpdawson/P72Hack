@@ -3,8 +3,10 @@ import folium
 import json
 import os
 from folium.plugins import Fullscreen
+from views import views_bp
 
 app = Flask(__name__)
+app.register_blueprint(views_bp)
 
 def get_image_url(name):
     folder = "entry_images"  # Make sure this folder is in your "static" directory
