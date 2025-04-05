@@ -147,8 +147,6 @@
             background-position: right 10px center;
             background-size: 14px;
         }
-
-        
     </style>
 </head>
 
@@ -199,11 +197,11 @@
                     </select>
                 </div>
                 <button type="submit"
-                style="margin-top: 12px; padding: 0px 15px; font-size: 14px; border-radius: 6px; background-color: #0a4f98; color: white; border: none; cursor: pointer;">
-                Submit
-            </button>
+                    style="margin-top: 12px; padding: 0px 15px; font-size: 14px; border-radius: 6px; background-color: #0a4f98; color: white; border: none; cursor: pointer;">
+                    Submit
+                </button>
             </div>
-            
+
 
         </form>
     </div>
@@ -307,44 +305,55 @@
 
         let selectedDate = null;
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth',
-    selectable: true,
-    dateClick: function (info) {
-        document.querySelectorAll('.fc-daygrid-day-number').forEach(el => {
-            el.classList.remove('selected-day-number');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            selectable: true,
+            dateClick: function (info) {
+                document.querySelectorAll('.fc-daygrid-day-number').forEach(el => {
+                    el.classList.remove('selected-day-number');
+                });
+
+                const dayNumberEl = info.dayEl.querySelector('.fc-daygrid-day-number');
+                if (dayNumberEl) {
+                    dayNumberEl.classList.add('selected-day-number');
+                }
+
+                selectedDate = info.dateStr; // yyyy-mm-dd format
+            }
         });
-
-        const dayNumberEl = info.dayEl.querySelector('.fc-daygrid-day-number');
-        if (dayNumberEl) {
-            dayNumberEl.classList.add('selected-day-number');
-        }
-
-        selectedDate = info.dateStr; // yyyy-mm-dd format
-    }
-});
     </script>
     <script>
         document.getElementById("filter-form").addEventListener("submit", function (e) {
-          e.preventDefault(); // Stop normal form submission
-      
-          if (!selectedDate) {
-            alert("Please select a date on the calendar.");
-            return;
-          }
-      
-          const hour = document.getElementById("hour").value;
-          const minute = document.getElementById("minute").value;
-          const interval = document.getElementById("interval").value;
-      
-          const datetimeStart = `${selectedDate} ${hour}:${minute}:00`;
-          const url = `/filter?datetime_start=${encodeURIComponent(datetimeStart)}&interval=${encodeURIComponent(interval)}`;
-      
-          // Redirect to the URL
-          window.location.href = url;
-        });
-      </script>
-      
+            e.preventDefault(); // Stop normal form submission
+
+            if (!selectedDate) {
+                alert("Please select a date on the calendar.");
+                return;
+            }
+
+            const hour = document.getElementById("hour").value;
+            const minute = document.getElementById("minute").value;
+            const interval = document.getElementById("interval").value;
+
+            const datetimeStart = `${selectedDate} ${hour}:${minute}:00`;
+            const url = `/filter?datetime_start=${encodeURIComponent(datetimeStart)}&interval=${encodeURIComponent(interval)}`;
+            fetch(url, {
+                method: "GET",  // or "POST" if you're submitting data
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+                .then(response => response.json())  // Parse the JSON response
+                .then(data => {
+                    // Handle the response data here
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+
+    </script>
+
 </body>
 
 </html>
